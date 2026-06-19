@@ -1,0 +1,2655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foremost Public Adjusters — Google Ads Performance Report | Jan–May 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;700;900&display=swap');
+
+  :root {
+    --navy: #0B1F3A;
+    --navy-mid: #142E52;
+    --navy-light: #1E3F6F;
+    --gold: #C9A84C;
+    --gold-light: #E2C97E;
+    --gold-pale: #F9F3E3;
+    --white: #FFFFFF;
+    --gray-50: #F8F9FA;
+    --gray-100: #F1F3F5;
+    --gray-200: #E9ECEF;
+    --gray-400: #ADB5BD;
+    --gray-600: #6C757D;
+    --gray-800: #343A40;
+    --green: #1A7F4E;
+    --green-light: #D1FAE5;
+    --red: #B91C1C;
+    --red-light: #FEE2E2;
+    --amber: #D97706;
+    --amber-light: #FEF3C7;
+    --text-main: #0B1F3A;
+    --text-body: #374151;
+    --text-muted: #6B7280;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-50);
+    color: var(--text-body);
+    line-height: 1.6;
+  }
+
+  /* ===== COVER PAGE ===== */
+  .cover {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+  }
+
+  .cover-accent {
+    position: absolute;
+    top: 0; right: 0;
+    width: 520px; height: 520px;
+    background: radial-gradient(circle at center, rgba(201,168,76,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cover-line {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 6px;
+    background: linear-gradient(180deg, var(--gold) 0%, transparent 100%);
+  }
+
+  .cover-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 72px 0;
+  }
+
+  .cover-agency {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .cover-date-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 6px 16px;
+    border-radius: 2px;
+  }
+
+  .cover-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 72px;
+  }
+
+  .cover-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .cover-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  .cover-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 900;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 8px;
+    max-width: 680px;
+  }
+
+  .cover-title span {
+    color: var(--gold);
+  }
+
+  .cover-subtitle {
+    font-size: 17px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 56px;
+    max-width: 500px;
+  }
+
+  .cover-kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 760px;
+  }
+
+  .cover-kpi {
+    background: rgba(255,255,255,0.04);
+    padding: 24px 20px;
+    text-align: center;
+  }
+
+  .cover-kpi-val {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .cover-kpi-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .cover-footer {
+    padding: 32px 72px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .cover-footer-left {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+  }
+  .cover-footer-left strong {
+    color: rgba(255,255,255,0.65);
+    font-weight: 600;
+  }
+
+  .cover-footer-right {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  /* ===== LAYOUT ===== */
+  .report-body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px 80px;
+  }
+
+  /* ===== SECTION HEADERS ===== */
+  .section {
+    margin-top: 72px;
+  }
+
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+
+  .section-num {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: var(--navy);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  .section-eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.2;
+  }
+
+  .section-desc {
+    font-size: 14px;
+    color: var(--text-muted);
+    max-width: 720px;
+    margin-bottom: 28px;
+  }
+
+  .divider {
+    width: 48px;
+    height: 3px;
+    background: var(--gold);
+    margin-bottom: 28px;
+  }
+
+  /* ===== EXECUTIVE SUMMARY ===== */
+  .exec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 28px;
+  }
+
+  .exec-card {
+    background: var(--white);
+    border-radius: 6px;
+    border: 1px solid var(--gray-200);
+    padding: 28px 32px;
+  }
+
+  .exec-card.navy {
+    background: var(--navy);
+    border-color: var(--navy);
+  }
+
+  .exec-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .exec-card.navy .exec-card-label {
+    color: rgba(255,255,255,0.45);
+  }
+
+  .exec-stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .exec-stat {
+    border-left: 3px solid var(--gold);
+    padding-left: 14px;
+  }
+
+  .exec-stat-val {
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .exec-card.navy .exec-stat-val {
+    color: var(--gold);
+  }
+
+  .exec-stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .exec-card.navy .exec-stat-label {
+    color: rgba(255,255,255,0.45);
+  }
+
+  .wins-challenges {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .win-item, .challenge-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .win-item:last-child, .challenge-item:last-child {
+    border-bottom: none;
+  }
+
+  .win-icon {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    background: var(--green-light);
+    color: var(--green);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .challenge-icon {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    background: var(--amber-light);
+    color: var(--amber);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-top: 2px;
+  }
+
+  .win-text, .challenge-text {
+    font-size: 13px;
+    color: var(--text-body);
+    line-height: 1.5;
+  }
+
+  .win-text strong, .challenge-text strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  /* ===== KPI DASHBOARD ===== */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .kpi-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+  }
+
+  .kpi-card.highlight::before {
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 100%);
+  }
+
+  .kpi-card-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .kpi-card-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--navy);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .kpi-card-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .kpi-trend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-top: 8px;
+  }
+  .kpi-trend.up { background: var(--green-light); color: var(--green); }
+  .kpi-trend.down { background: var(--red-light); color: var(--red); }
+  .kpi-trend.neutral { background: var(--amber-light); color: var(--amber); }
+
+  /* ===== TABLES ===== */
+  .table-wrap {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .table-header {
+    padding: 16px 24px;
+    background: var(--navy);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .table-header-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .table-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(201,168,76,0.2);
+    color: var(--gold);
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  thead th {
+    background: var(--gray-50);
+    padding: 10px 16px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-align: left;
+    border-bottom: 1px solid var(--gray-200);
+  }
+
+  tbody td {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--gray-100);
+    color: var(--text-body);
+    vertical-align: middle;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  tbody tr:hover td {
+    background: var(--gold-pale);
+  }
+
+  tbody tr.total-row td {
+    background: var(--navy);
+    color: white;
+    font-weight: 700;
+    border-bottom: none;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .pill.green { background: var(--green-light); color: var(--green); }
+  .pill.red { background: var(--red-light); color: var(--red); }
+  .pill.amber { background: var(--amber-light); color: var(--amber); }
+  .pill.navy { background: rgba(11,31,58,0.08); color: var(--navy); }
+  .pill.gold { background: rgba(201,168,76,0.15); color: #8B6914; }
+
+  /* ===== CHARTS ===== */
+  .chart-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .chart-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .chart-grid-1 {
+    margin-bottom: 24px;
+  }
+
+  .chart-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .chart-card-header {
+    padding: 16px 20px 0;
+    border-bottom: 1px solid var(--gray-100);
+    padding-bottom: 14px;
+  }
+
+  .chart-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 2px;
+  }
+
+  .chart-card-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  .chart-card-body {
+    padding: 20px;
+    position: relative;
+  }
+
+  .chart-insight {
+    background: var(--gold-pale);
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px;
+    margin: 12px 0 0;
+    font-size: 12px;
+    color: var(--text-body);
+    line-height: 1.5;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .chart-insight strong {
+    color: var(--navy);
+  }
+
+  /* ===== INSIGHT BOXES ===== */
+  .insight-box {
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 24px 28px;
+    margin-top: 20px;
+  }
+
+  .insight-box-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+
+  .insight-box-text {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.7;
+  }
+
+  /* ===== RECOMMENDATIONS ===== */
+  .rec-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .rec-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 20px 22px;
+    display: flex;
+    gap: 16px;
+  }
+
+  .rec-num {
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--gray-200);
+    font-family: 'Playfair Display', serif;
+    line-height: 1;
+    min-width: 36px;
+  }
+
+  .rec-content {}
+
+  .rec-priority {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .rec-priority.urgent { color: var(--red); }
+  .rec-priority.high { color: var(--amber); }
+  .rec-priority.medium { color: var(--green); }
+
+  .rec-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .rec-text {
+    font-size: 12px;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+
+  /* ===== STRATEGY CARDS ===== */
+  .strategy-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .strategy-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 22px;
+    border-top: 3px solid var(--gold);
+  }
+
+  .strategy-icon {
+    font-size: 24px;
+    margin-bottom: 12px;
+  }
+
+  .strategy-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+
+  .strategy-items {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .strategy-items li {
+    font-size: 12px;
+    color: var(--text-body);
+    display: flex;
+    gap: 8px;
+    line-height: 1.4;
+  }
+
+  .strategy-items li::before {
+    content: '→';
+    color: var(--gold);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* ===== CONCLUSION ===== */
+  .conclusion {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 48px 56px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 48px;
+  }
+
+  .conclusion::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 32px;
+    font-family: 'Playfair Display', serif;
+    font-size: 200px;
+    color: rgba(201,168,76,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .conclusion-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .conclusion-text {
+    font-size: 15px;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.8;
+    max-width: 800px;
+    margin-bottom: 20px;
+  }
+
+  .conclusion-sig {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .conclusion-sig-name {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .conclusion-sig-title {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+  }
+
+  .conclusion-sig-date {
+    font-size: 11px;
+    color: rgba(255,255,255,0.35);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ===== COMPETITOR TABLE ===== */
+  .comp-bar-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .comp-bar-row {
+    display: grid;
+    grid-template-columns: 180px 1fr 60px;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .comp-bar-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--navy);
+    text-align: right;
+  }
+
+  .comp-bar-name.you { color: var(--gold); }
+
+  .comp-bar-track {
+    height: 10px;
+    background: var(--gray-100);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .comp-bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--gray-400);
+  }
+
+  .comp-bar-fill.you {
+    background: var(--gold);
+  }
+
+  .comp-bar-pct {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text-muted);
+  }
+
+  .comp-bar-pct.you { color: var(--gold); }
+
+  /* ===== DEVICE CARDS ===== */
+  .device-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .device-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    padding: 24px;
+    text-align: center;
+  }
+
+  .device-icon {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+
+  .device-name {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+  }
+
+  .device-metric {
+    margin-bottom: 8px;
+  }
+
+  .device-metric-val {
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--navy);
+  }
+
+  .device-metric-label {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 2px;
+  }
+
+  .device-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--gray-100);
+  }
+
+  .device-stat {
+    text-align: center;
+  }
+
+  .device-stat-val {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  .device-stat-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* Page break for print */
+  @media print {
+    .section { page-break-before: always; }
+    .cover { page-break-after: always; }
+  }
+
+  .monthly-table { margin-bottom: 24px; }
+
+  .highlight-cell {
+    background: rgba(201,168,76,0.08);
+    font-weight: 700;
+    color: var(--navy) !important;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+  <div class="cover-accent"></div>
+  <div class="cover-line"></div>
+
+  <div class="cover-header">
+    <div class="cover-agency">Performance Intelligence Report</div>
+    <div class="cover-date-badge">January — May 2026</div>
+  </div>
+
+  <div class="cover-body">
+    <div class="cover-eyebrow">Google Ads · Search Performance</div>
+    <h1 class="cover-title">Foremost <span>Public Adjusters</span></h1>
+    <p class="cover-subtitle">Paid Search Performance Report & Strategic Growth Analysis<br>South Florida · Insurance Claims · Lead Generation</p>
+
+    <div class="cover-kpi-strip">
+      <div class="cover-kpi">
+        <div class="cover-kpi-val">$8,320</div>
+        <div class="cover-kpi-label">Total Spend</div>
+      </div>
+      <div class="cover-kpi">
+        <div class="cover-kpi-val">56</div>
+        <div class="cover-kpi-label">Total Leads</div>
+      </div>
+      <div class="cover-kpi">
+        <div class="cover-kpi-val">$148.57</div>
+        <div class="cover-kpi-label">Blended CPL</div>
+      </div>
+      <div class="cover-kpi">
+        <div class="cover-kpi-val">7.16%</div>
+        <div class="cover-kpi-label">Conv. Rate</div>
+      </div>
+      <div class="cover-kpi">
+        <div class="cover-kpi-val">$114</div>
+        <div class="cover-kpi-label">Best CPL (Apr)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cover-footer">
+    <div class="cover-footer-left">
+      Prepared for <strong>Foremost Public Adjusters</strong> &nbsp;|&nbsp; Confidential — For Client Use Only
+    </div>
+    <div class="cover-footer-right">June 2026</div>
+  </div>
+</div>
+
+<!-- ===== REPORT BODY ===== -->
+<div class="report-body">
+
+  <!-- ===== 1. EXECUTIVE SUMMARY ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">01</span>
+      <span class="section-eyebrow">Performance Overview</span>
+    </div>
+    <h2 class="section-title">Executive Summary</h2>
+    <div class="divider"></div>
+
+    <div class="exec-grid">
+      <div class="exec-card">
+        <div class="exec-card-label">Campaign Performance · Jan–May 2026</div>
+        <div class="exec-stat-row">
+          <div class="exec-stat">
+            <div class="exec-stat-val">$8,320</div>
+            <div class="exec-stat-label">Total Spend</div>
+          </div>
+          <div class="exec-stat">
+            <div class="exec-stat-val">782</div>
+            <div class="exec-stat-label">Total Clicks</div>
+          </div>
+          <div class="exec-stat">
+            <div class="exec-stat-val">26,820</div>
+            <div class="exec-stat-label">Impressions</div>
+          </div>
+        </div>
+      </div>
+      <div class="exec-card navy">
+        <div class="exec-card-label">Lead Generation Outcomes</div>
+        <div class="exec-stat-row">
+          <div class="exec-stat">
+            <div class="exec-stat-val">56</div>
+            <div class="exec-stat-label">Total Leads</div>
+          </div>
+          <div class="exec-stat">
+            <div class="exec-stat-val">$148.57</div>
+            <div class="exec-stat-label">Blended CPL</div>
+          </div>
+          <div class="exec-stat">
+            <div class="exec-stat-val">7.16%</div>
+            <div class="exec-stat-label">Conv. Rate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wins-challenges">
+      <div class="exec-card" style="padding: 24px 28px;">
+        <div class="exec-card-label" style="color: var(--green); margin-bottom: 16px;">✓ Key Wins</div>
+        <div>
+          <div class="win-item">
+            <div class="win-icon">✓</div>
+            <div class="win-text"><strong>40% CPL reduction</strong> from January ($190) to April ($114) without any budget increase — a major efficiency gain.</div>
+          </div>
+          <div class="win-item">
+            <div class="win-icon">✓</div>
+            <div class="win-text"><strong>CVR nearly doubled</strong> from 5.66% (Jan) to 10.27% (Apr), indicating improving ad-to-page alignment and keyword refinement.</div>
+          </div>
+          <div class="win-item">
+            <div class="win-icon">✓</div>
+            <div class="win-text"><strong>April delivered 15 leads</strong> — the campaign's peak — at $114 CPL and 10.27% CVR, establishing a repeatable performance benchmark.</div>
+          </div>
+          <div class="win-item">
+            <div class="win-icon">✓</div>
+            <div class="win-text"><strong>CT AN DSA campaign</strong> generated 36 leads at $108.78 CPL — the highest lead volume and lowest CPL of all campaigns.</div>
+          </div>
+          <div class="win-item">
+            <div class="win-icon">✓</div>
+            <div class="win-text"><strong>Mobile is the dominant driver</strong> — 43 of 48 attributed conversions came from mobile phones (89.6% of total conversions).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="exec-card" style="padding: 24px 28px;">
+        <div class="exec-card-label" style="color: var(--amber); margin-bottom: 16px;">⚠ Key Challenges</div>
+        <div>
+          <div class="challenge-item">
+            <div class="challenge-icon">!</div>
+            <div class="challenge-text"><strong>May pullback:</strong> CPL rose 25% from $114 → $143 and CVR dropped from 10.27% → 7.50% despite identical spend. Post-click issue requiring urgent diagnosis.</div>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-icon">!</div>
+            <div class="challenge-text"><strong>Low impression share</strong> of 23.03% — competitors like stellaradjusting.com, recovery-claim.com, and fightforyourclaim.com consistently outrank Foremost (85–73% top-of-page rate).</div>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-icon">!</div>
+            <div class="challenge-text"><strong>Brand confusion waste:</strong> The DSA campaign is triggering competitor brand searches ("Pardo Public Adjusters," "Stellar Adjusters") and Foremost Insurance brand queries, diluting budget.</div>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-icon">!</div>
+            <div class="challenge-text"><strong>Desktop severely underperforming:</strong> 147 desktop clicks generated only 4 conversions (2.7% CVR vs. 15.6% on mobile) at $397.95 CPL — nearly 3× mobile CPL.</div>
+          </div>
+          <div class="challenge-item">
+            <div class="challenge-icon">!</div>
+            <div class="challenge-text"><strong>Geographic concentration risk:</strong> 79% of leads concentrated in Miami-Dade and Broward counties. Palm Beach and Orlando showing strong early signals but underfunded.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 2. KPI DASHBOARD ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">02</span>
+      <span class="section-eyebrow">At a Glance</span>
+    </div>
+    <h2 class="section-title">KPI Dashboard</h2>
+    <div class="divider"></div>
+
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-card-label">Impressions</div>
+        <div class="kpi-card-value">26,820</div>
+        <div class="kpi-card-sub">Jan–May 2026</div>
+        <div class="kpi-trend neutral">→ Stable ~5,400/mo</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-label">Clicks</div>
+        <div class="kpi-card-value">782</div>
+        <div class="kpi-card-sub">Across all campaigns</div>
+        <div class="kpi-trend neutral">~156 clicks / month</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-label">Click-Through Rate</div>
+        <div class="kpi-card-value">2.92%</div>
+        <div class="kpi-card-sub">Blended CTR</div>
+        <div class="kpi-trend up">↑ Above 2.5% benchmark</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-label">Avg. CPC</div>
+        <div class="kpi-card-value">$10.64</div>
+        <div class="kpi-card-sub">Blended cost per click</div>
+        <div class="kpi-trend up">↑ Stable, no inflation</div>
+      </div>
+      <div class="kpi-card highlight">
+        <div class="kpi-card-label">Total Leads</div>
+        <div class="kpi-card-value">56</div>
+        <div class="kpi-card-sub">Qualified conversions</div>
+        <div class="kpi-trend up">↑ Apr best: 15 leads</div>
+      </div>
+      <div class="kpi-card highlight">
+        <div class="kpi-card-label">Conversion Rate</div>
+        <div class="kpi-card-value">7.16%</div>
+        <div class="kpi-card-sub">Blended CVR</div>
+        <div class="kpi-trend up">↑ Peak 10.27% in Apr</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-label">Cost Per Lead</div>
+        <div class="kpi-card-value">$148.57</div>
+        <div class="kpi-card-sub">Blended CPL</div>
+        <div class="kpi-trend down">↓ Target: sub-$130</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-card-label">Impression Share</div>
+        <div class="kpi-card-value">23.03%</div>
+        <div class="kpi-card-sub">Search impression share</div>
+        <div class="kpi-trend down">↓ Significant upside</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 3. MONTHLY TREND ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">03</span>
+      <span class="section-eyebrow">Trend Analysis</span>
+    </div>
+    <h2 class="section-title">Monthly Performance Trend</h2>
+    <div class="divider"></div>
+
+    <div class="table-wrap monthly-table">
+      <div class="table-header">
+        <span class="table-header-title">Month-by-Month Performance · Jan–May 2026</span>
+        <span class="table-badge">5-Month View</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>Impressions</th>
+            <th>Clicks</th>
+            <th>CTR</th>
+            <th>Avg CPC</th>
+            <th>Spend</th>
+            <th>Leads</th>
+            <th>Conv Rate</th>
+            <th>CPL</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Jan 2026</strong></td>
+            <td>6,110</td>
+            <td>159</td>
+            <td>2.60%</td>
+            <td>$10.73</td>
+            <td>$1,710</td>
+            <td>9</td>
+            <td>5.66%</td>
+            <td>$190.00</td>
+          </tr>
+          <tr>
+            <td><strong>Feb 2026</strong></td>
+            <td>5,060</td>
+            <td>157</td>
+            <td>3.10%</td>
+            <td>$9.30</td>
+            <td>$1,460</td>
+            <td>7</td>
+            <td>4.46%</td>
+            <td>$208.57</td>
+          </tr>
+          <tr>
+            <td><strong>Mar 2026</strong></td>
+            <td>5,370</td>
+            <td>160</td>
+            <td>2.98%</td>
+            <td>$10.74</td>
+            <td>$1,720</td>
+            <td>13</td>
+            <td>8.13%</td>
+            <td>$132.31</td>
+          </tr>
+          <tr class="highlight-cell" style="background: rgba(201,168,76,0.08);">
+            <td><strong>Apr 2026 ⭐</strong></td>
+            <td>4,780</td>
+            <td>146</td>
+            <td>3.06%</td>
+            <td>$11.71</td>
+            <td>$1,710</td>
+            <td><strong>15</strong></td>
+            <td><strong>10.27%</strong></td>
+            <td><strong>$114.00</strong></td>
+          </tr>
+          <tr>
+            <td><strong>May 2026</strong></td>
+            <td>5,500</td>
+            <td>160</td>
+            <td>2.91%</td>
+            <td>$10.74</td>
+            <td>$1,720</td>
+            <td>12</td>
+            <td>7.50%</td>
+            <td>$143.33</td>
+          </tr>
+          <tr class="total-row">
+            <td>TOTAL / AVG</td>
+            <td>26,820</td>
+            <td>782</td>
+            <td>2.92%</td>
+            <td>$10.64</td>
+            <td>$8,320</td>
+            <td>56</td>
+            <td>7.16%</td>
+            <td>$148.57</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">Monthly Lead Volume & CVR Trend</div>
+          <div class="chart-card-sub">Leads (bars) · Conversion Rate % (line)</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="leadsChart" height="220"></canvas>
+          <div class="chart-insight"><strong>Key finding:</strong> April 2026 was the peak month with 15 leads and 10.27% CVR — a 67% lead increase from January without any budget uplift. May's partial pullback (12 leads, 7.50% CVR) with identical spend points to a post-click conversion issue rather than a traffic quality problem.</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">Cost Per Lead Monthly Trend</div>
+          <div class="chart-card-sub">CPL trajectory Jan–May 2026</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="cplChart" height="220"></canvas>
+          <div class="chart-insight"><strong>Key finding:</strong> CPL dropped 40% from $190 (Jan) to $114 (Apr) driven by improving Quality Scores and better keyword intent matching. The May reversal to $143 (+25%) must be corrected before hurricane season demand accelerates in June.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid-1">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">Spend vs Leads — Combo View</div>
+          <div class="chart-card-sub">Monthly spend (bars, $) vs. lead volume (line)</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="spendLeadsChart" height="160"></canvas>
+          <div class="chart-insight"><strong>Key finding:</strong> Spend remained virtually constant ($1,460–$1,720/month) across all 5 months. All efficiency gains and losses are attributable to conversion rate changes — not budget fluctuations. This isolates the opportunity: same budget, better performance is achievable through landing page and keyword optimization alone.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 4. CAMPAIGN ANALYSIS ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">04</span>
+      <span class="section-eyebrow">Campaign Intelligence</span>
+    </div>
+    <h2 class="section-title">Campaign Analysis</h2>
+    <div class="divider"></div>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <div class="table-header">
+        <span class="table-header-title">Campaign Performance · Jan–Jun 17, 2026 (Full Period)</span>
+        <span class="table-badge">3 Active Campaigns</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Campaign</th>
+            <th>Type</th>
+            <th>Budget/Day</th>
+            <th>Spend</th>
+            <th>Clicks</th>
+            <th>Leads</th>
+            <th>CVR</th>
+            <th>CPL</th>
+            <th>Strategy</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>CT AN DSA</strong></td>
+            <td>Search (DSA)</td>
+            <td>$30</td>
+            <td>$3,916</td>
+            <td>266</td>
+            <td><strong>36</strong></td>
+            <td><strong>13.53%</strong></td>
+            <td><strong>$108.78</strong></td>
+            <td>Max Conversions</td>
+            <td><span class="pill green">Eligible</span></td>
+          </tr>
+          <tr>
+            <td><strong>CT AN Search Local &amp; Near Me</strong></td>
+            <td>Search</td>
+            <td>$10</td>
+            <td>$1,607</td>
+            <td>129</td>
+            <td>9</td>
+            <td>6.98%</td>
+            <td>$178.51</td>
+            <td>Max Conversions</td>
+            <td><span class="pill amber">Learning</span></td>
+          </tr>
+          <tr>
+            <td><strong>HTS- Jun10 - All Services</strong></td>
+            <td>Search</td>
+            <td>$20</td>
+            <td>$144</td>
+            <td>37</td>
+            <td>3</td>
+            <td>8.11%</td>
+            <td>$48.06</td>
+            <td>Max Conversions</td>
+            <td><span class="pill amber">Limited</span></td>
+          </tr>
+          <tr class="total-row">
+            <td>ACCOUNT TOTAL</td>
+            <td>—</td>
+            <td>—</td>
+            <td>$9,315</td>
+            <td>432</td>
+            <td>48</td>
+            <td>11.11%</td>
+            <td>$118.06</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">Leads by Campaign</div>
+          <div class="chart-card-sub">Total leads attributed per campaign</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="campaignLeadsChart" height="200"></canvas>
+          <div class="chart-insight"><strong>CT AN DSA</strong> is the performance engine — 75% of all leads at the lowest CPL ($108.78). The new <strong>HTS All Services</strong> campaign shows early promise at $48 CPL but is budget-constrained. <strong>Local &amp; Near Me</strong> needs bidding strategy review; it's in learning phase with 63% higher CPL than DSA.</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">CPL by Campaign</div>
+          <div class="chart-card-sub">Cost per lead comparison</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="campaignCPLChart" height="200"></canvas>
+          <div class="chart-insight"><strong>Budget allocation recommendation:</strong> Increase CT AN DSA budget from $30 → $45/day, expand HTS All Services from $20 → $35/day (add more keywords), maintain Local &amp; Near Me at $10/day while learning phase completes. Combined daily budget target: $90/day for hurricane season.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-box-title">Campaign Strategy Assessment</div>
+      <div class="insight-box-text">
+        The CT AN DSA (Dynamic Search Ads) campaign is Foremost's most efficient lead generation engine, operating at $108.78 CPL with a 13.53% conversion rate. DSA's ability to automatically match to relevant queries across the site is generating 36 of 48 tracked leads. The newly launched HTS All Services campaign (active since June 10) is performing exceptionally at $48.06 CPL across only 37 clicks — this budget needs immediate scale-up before hurricane season peaks. The Local &amp; Near Me campaign remains in Google's algorithm learning phase; any budget changes or bid modifications should be deferred until it exits learning to avoid resetting the optimization window.
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 5. DEVICE ANALYSIS ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-eyebrow">Device Intelligence</span>
+    </div>
+    <h2 class="section-title">Device Performance Analysis</h2>
+    <div class="divider"></div>
+
+    <div class="device-grid" style="margin-bottom: 24px;">
+      <div class="device-card" style="border-top: 3px solid #1A7F4E;">
+        <div class="device-icon">📱</div>
+        <div class="device-name">Mobile Phones</div>
+        <div class="device-metric">
+          <div class="device-metric-val">43</div>
+          <div class="device-metric-label">Conversions</div>
+        </div>
+        <div class="device-stats">
+          <div class="device-stat">
+            <div class="device-stat-val">$3,992</div>
+            <div class="device-stat-label">Spend</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val">$92.83</div>
+            <div class="device-stat-label">CPL</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val">276</div>
+            <div class="device-stat-label">Clicks</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val">15.6%</div>
+            <div class="device-stat-label">CVR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="device-card" style="border-top: 3px solid var(--red);">
+        <div class="device-icon">💻</div>
+        <div class="device-name">Computers</div>
+        <div class="device-metric">
+          <div class="device-metric-val">4</div>
+          <div class="device-metric-label">Conversions</div>
+        </div>
+        <div class="device-stats">
+          <div class="device-stat">
+            <div class="device-stat-val">$1,592</div>
+            <div class="device-stat-label">Spend</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val" style="color: var(--red);">$397.95</div>
+            <div class="device-stat-label">CPL</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val">147</div>
+            <div class="device-stat-label">Clicks</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val" style="color: var(--red);">2.7%</div>
+            <div class="device-stat-label">CVR</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="device-card" style="border-top: 3px solid var(--amber);">
+        <div class="device-icon">📟</div>
+        <div class="device-name">Tablets</div>
+        <div class="device-metric">
+          <div class="device-metric-val">1</div>
+          <div class="device-metric-label">Conversions</div>
+        </div>
+        <div class="device-stats">
+          <div class="device-stat">
+            <div class="device-stat-val">$83</div>
+            <div class="device-stat-label">Spend</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val">$83.48</div>
+            <div class="device-stat-label">CPL</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val">9</div>
+            <div class="device-stat-label">Clicks</div>
+          </div>
+          <div class="device-stat">
+            <div class="device-stat-val">11.1%</div>
+            <div class="device-stat-label">CVR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chart-grid-2">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">Leads by Device</div>
+          <div class="chart-card-sub">Conversion distribution across devices</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="devicePieChart" height="220"></canvas>
+          <div class="chart-insight"><strong>Mobile dominates:</strong> 89.6% of conversions originate from mobile phones at a $92.83 CPL — significantly below the blended $148.57 average. Recommend applying a +20–25% mobile bid adjustment to capture more high-intent mobile queries in hurricane season.</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">CPL by Device</div>
+          <div class="chart-card-sub">Cost efficiency comparison</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="deviceCPLChart" height="220"></canvas>
+          <div class="chart-insight"><strong>Desktop crisis:</strong> Desktop CPL at $397.95 is 4.3× mobile CPL. With only 2.7% CVR vs. 15.6% on mobile, the desktop landing page experience likely needs CTA optimization and a mobile-first form redesign. Consider applying a –30% desktop bid modifier while investigating LP performance by device in GA4.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 6. SEARCH TERMS ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">06</span>
+      <span class="section-eyebrow">Search Intent Analysis</span>
+    </div>
+    <h2 class="section-title">Search Term Performance</h2>
+    <div class="divider"></div>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <div class="table-header">
+        <span class="table-header-title">Top Converting Search Terms · Jan–May 2026</span>
+        <span class="table-badge">High-Intent Queries</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Search Term</th>
+            <th>Match Type</th>
+            <th>Clicks</th>
+            <th>Cost</th>
+            <th>Leads</th>
+            <th>CVR</th>
+            <th>CPL</th>
+            <th>Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>insurance adjusters near me</strong></td>
+            <td>Phrase</td>
+            <td>33</td>
+            <td>$411.89</td>
+            <td>5</td>
+            <td>15.15%</td>
+            <td>$82.38</td>
+            <td><span class="pill green">Top Performer</span></td>
+          </tr>
+          <tr>
+            <td><strong>public adjuster near me</strong></td>
+            <td>Exact (CV)</td>
+            <td>5</td>
+            <td>$38.95</td>
+            <td>2</td>
+            <td>40.00%</td>
+            <td>$19.48</td>
+            <td><span class="pill gold">Scale Up</span></td>
+          </tr>
+          <tr>
+            <td><strong>public adjuster</strong></td>
+            <td>Phrase</td>
+            <td>6</td>
+            <td>$31.47</td>
+            <td>2</td>
+            <td>33.33%</td>
+            <td>$15.74</td>
+            <td><span class="pill gold">Scale Up</span></td>
+          </tr>
+          <tr>
+            <td><strong>encore public adjusters</strong></td>
+            <td>Exact</td>
+            <td>1</td>
+            <td>$18.91</td>
+            <td>2</td>
+            <td>200.00%</td>
+            <td>$9.46</td>
+            <td><span class="pill amber">Investigate</span></td>
+          </tr>
+          <tr>
+            <td><strong>adjuster insurance</strong></td>
+            <td>—</td>
+            <td>1</td>
+            <td>$17.96</td>
+            <td>2</td>
+            <td>200.00%</td>
+            <td>$8.98</td>
+            <td><span class="pill amber">Investigate</span></td>
+          </tr>
+          <tr>
+            <td><strong>loss adjuster near me</strong></td>
+            <td>Phrase</td>
+            <td>5</td>
+            <td>$46.29</td>
+            <td>1</td>
+            <td>20.00%</td>
+            <td>$46.29</td>
+            <td><span class="pill green">Keep Active</span></td>
+          </tr>
+          <tr>
+            <td><strong>public insurance adjusters near me</strong></td>
+            <td>Exact</td>
+            <td>1</td>
+            <td>$18.83</td>
+            <td>1</td>
+            <td>100.00%</td>
+            <td>$18.83</td>
+            <td><span class="pill gold">Scale Up</span></td>
+          </tr>
+          <tr>
+            <td><strong>independent insurance adjusters near me</strong></td>
+            <td>Exact</td>
+            <td>1</td>
+            <td>$12.67</td>
+            <td>1</td>
+            <td>100.00%</td>
+            <td>$12.67</td>
+            <td><span class="pill gold">Scale Up</span></td>
+          </tr>
+          <tr>
+            <td><strong>public adjusters miami fl</strong></td>
+            <td>Exact</td>
+            <td>1</td>
+            <td>$2.89</td>
+            <td>1</td>
+            <td>100.00%</td>
+            <td>$2.89</td>
+            <td><span class="pill green">Top Performer</span></td>
+          </tr>
+          <tr>
+            <td><strong>home adjuster near me</strong></td>
+            <td>Exact</td>
+            <td>1</td>
+            <td>$35.44</td>
+            <td>1</td>
+            <td>100.00%</td>
+            <td>$35.44</td>
+            <td><span class="pill gold">Scale Up</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="chart-card" style="margin-bottom: 20px;">
+      <div class="chart-card-header">
+        <div class="chart-card-title">Top Search Terms by Lead Volume</div>
+        <div class="chart-card-sub">Showing top 8 converting search terms</div>
+      </div>
+      <div class="chart-card-body">
+        <canvas id="searchTermsChart" height="180"></canvas>
+      </div>
+    </div>
+
+    <div class="exec-card" style="padding: 24px 28px; margin-bottom: 16px;">
+      <div class="exec-card-label" style="color: var(--red); margin-bottom: 12px;">⛔ Negative Keyword Opportunities — Exclude These Now</div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">foremost insurance (brand confusion)</div>
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">pardo public adjusters (competitor)</div>
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">stellar adjusters (competitor)</div>
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">rapid public adjusters (competitor)</div>
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">title company / title agency</div>
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">workers comp / helmsman</div>
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">foremost rv insurance</div>
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">lemonade insurance claim</div>
+        <div class="pill navy" style="padding: 6px 12px; font-size: 12px;">assurance insurance company</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 7. KEYWORD ANALYSIS ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">07</span>
+      <span class="section-eyebrow">Keyword Intelligence</span>
+    </div>
+    <h2 class="section-title">Keyword Performance Analysis</h2>
+    <div class="divider"></div>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <div class="table-header">
+        <span class="table-header-title">Active Keywords · Top Performers by Conversions</span>
+        <span class="table-badge">Phrase Match Dominant</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Keyword</th>
+            <th>Match Type</th>
+            <th>Campaign</th>
+            <th>Clicks</th>
+            <th>Spend</th>
+            <th>Leads</th>
+            <th>CVR</th>
+            <th>CPL</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>"insurance adjusters near me"</strong></td>
+            <td>Phrase</td>
+            <td>Local &amp; Near Me</td>
+            <td>33</td>
+            <td>$411.89</td>
+            <td>5</td>
+            <td><strong>15.15%</strong></td>
+            <td>$82.38</td>
+            <td><span class="pill green">Enabled</span></td>
+          </tr>
+          <tr>
+            <td><strong>"public adjuster"</strong></td>
+            <td>Phrase</td>
+            <td>HTS All Services</td>
+            <td>6</td>
+            <td>$31.47</td>
+            <td>2</td>
+            <td><strong>33.33%</strong></td>
+            <td>$15.74</td>
+            <td><span class="pill green">Enabled</span></td>
+          </tr>
+          <tr>
+            <td><strong>"independent adjuster near me"</strong></td>
+            <td>Phrase</td>
+            <td>HTS All Services</td>
+            <td>1</td>
+            <td>$9.13</td>
+            <td>1</td>
+            <td>100.00%</td>
+            <td>$9.13</td>
+            <td><span class="pill green">Enabled</span></td>
+          </tr>
+          <tr>
+            <td><strong>"public adjuster for home insurance claim"</strong></td>
+            <td>Phrase</td>
+            <td>Local &amp; Near Me</td>
+            <td>41</td>
+            <td>$526.68</td>
+            <td>2</td>
+            <td>4.88%</td>
+            <td>$263.34</td>
+            <td><span class="pill amber">Optimize</span></td>
+          </tr>
+          <tr>
+            <td><strong>"public claims adjuster near me"</strong></td>
+            <td>Phrase</td>
+            <td>Local &amp; Near Me</td>
+            <td>43</td>
+            <td>$533.48</td>
+            <td>1</td>
+            <td>2.33%</td>
+            <td>$533.48</td>
+            <td><span class="pill red">Review</span></td>
+          </tr>
+          <tr>
+            <td><strong>"loss adjuster near me"</strong></td>
+            <td>Phrase</td>
+            <td>Local &amp; Near Me</td>
+            <td>5</td>
+            <td>$46.29</td>
+            <td>1</td>
+            <td>20.00%</td>
+            <td>$46.29</td>
+            <td><span class="pill green">Enabled</span></td>
+          </tr>
+          <tr>
+            <td><strong>"loss adjuster"</strong></td>
+            <td>Phrase</td>
+            <td>Local &amp; Near Me</td>
+            <td>11</td>
+            <td>$35.79</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>—</td>
+            <td><span class="pill amber">Watch</span></td>
+          </tr>
+          <tr>
+            <td><strong>"insurance adjusters"</strong></td>
+            <td>Phrase</td>
+            <td>Local &amp; Near Me</td>
+            <td>5</td>
+            <td>$24.95</td>
+            <td>0</td>
+            <td>0.00%</td>
+            <td>—</td>
+            <td><span class="pill amber">Watch</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="insight-box">
+      <div class="insight-box-title">Keyword Recommendation</div>
+      <div class="insight-box-text">
+        "Insurance adjusters near me" is the account's standout keyword — 5 leads at $82.38 CPL with a 15.15% CVR against 33 clicks. It should receive a bid increase of 20-30% and be replicated across all campaigns. The "public claims adjuster near me" keyword is draining $533 per conversion and should be paused and replaced with tighter geographic modifiers (e.g., "public claims adjuster Miami"). Add high-intent negative intent terms: "job," "license," "career," "how to become," and "salary" to filter out non-client searches. Priority additions for hurricane season: "hurricane damage claim adjuster," "wind damage insurance claim help," "roof damage insurance claim South Florida."
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 8. LANDING PAGE ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">08</span>
+      <span class="section-eyebrow">Post-Click Experience</span>
+    </div>
+    <h2 class="section-title">Landing Page Analysis</h2>
+    <div class="divider"></div>
+
+    <div class="table-wrap" style="margin-bottom: 24px;">
+      <div class="table-header">
+        <span class="table-header-title">Top Landing Pages by Traffic · Consolidated View</span>
+        <span class="table-badge">Click Attribution</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Landing Page</th>
+            <th>Clicks</th>
+            <th>Spend</th>
+            <th>CTR</th>
+            <th>Avg CPC</th>
+            <th>Signal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>/insurance-claims-help/</strong></td>
+            <td>119</td>
+            <td>$1,398.71</td>
+            <td>2.25%</td>
+            <td>$11.76</td>
+            <td><span class="pill green">Primary LP</span></td>
+          </tr>
+          <tr>
+            <td><strong>/ (Homepage)</strong></td>
+            <td>88</td>
+            <td>$1,073.98</td>
+            <td>2.27%</td>
+            <td>$12.20</td>
+            <td><span class="pill amber">Optimize</span></td>
+          </tr>
+          <tr>
+            <td><strong>/miami/</strong></td>
+            <td>36</td>
+            <td>$361.49</td>
+            <td>1.29%</td>
+            <td>$10.04</td>
+            <td><span class="pill green">Geo LP</span></td>
+          </tr>
+          <tr>
+            <td><strong>/coral-gables/</strong></td>
+            <td>23</td>
+            <td>$342.59</td>
+            <td>2.07%</td>
+            <td>$14.90</td>
+            <td><span class="pill amber">Test</span></td>
+          </tr>
+          <tr>
+            <td><strong>/type-of-claims/</strong></td>
+            <td>18</td>
+            <td>$260.14</td>
+            <td>0.48%</td>
+            <td>$14.45</td>
+            <td><span class="pill navy">Info Page</span></td>
+          </tr>
+          <tr>
+            <td><strong>/damage/</strong></td>
+            <td>19</td>
+            <td>$251.70</td>
+            <td>0.40%</td>
+            <td>$13.25</td>
+            <td><span class="pill navy">Info Page</span></td>
+          </tr>
+          <tr>
+            <td><strong>/how-it-works/</strong></td>
+            <td>11</td>
+            <td>$121.59</td>
+            <td>0.24%</td>
+            <td>$11.05</td>
+            <td><span class="pill navy">Low CTR</span></td>
+          </tr>
+          <tr>
+            <td><strong>/filing-a-claim/</strong></td>
+            <td>13</td>
+            <td>$199.47</td>
+            <td>0.27%</td>
+            <td>$15.34</td>
+            <td><span class="pill amber">Optimize</span></td>
+          </tr>
+          <tr>
+            <td><strong>services.foremostpa.com/</strong></td>
+            <td>20</td>
+            <td>$63.01</td>
+            <td>5.75%</td>
+            <td>$3.15</td>
+            <td><span class="pill gold">High CTR</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="exec-card" style="padding: 24px 28px;">
+      <div class="exec-card-label">Landing Page Optimization Recommendations</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div>
+          <div class="win-item">
+            <div class="win-icon">1</div>
+            <div class="win-text"><strong>Primary LP (/insurance-claims-help/):</strong> Highest traffic LP. Add a sticky "Get Free Claim Review" CTA button visible above the fold on mobile. A/B test the headline with urgency variants ("Don't Accept a Low Settlement").</div>
+          </div>
+          <div class="win-item">
+            <div class="win-icon">2</div>
+            <div class="win-text"><strong>Homepage redirect audit:</strong> 88 paid clicks landing on the homepage indicates keyword-to-LP mismatch. DSA campaigns may be routing to homepage instead of service-specific pages. Configure URL filters in DSA to exclude non-conversion pages.</div>
+          </div>
+          <div class="win-item">
+            <div class="win-icon">3</div>
+            <div class="win-text"><strong>Geo landing pages:</strong> The /miami/ and /coral-gables/ pages are already receiving paid traffic. Build dedicated pages for Fort Lauderdale, Boca Raton, and Palm Beach to support location-based campaigns.</div>
+          </div>
+        </div>
+        <div>
+          <div class="win-item">
+            <div class="win-icon">4</div>
+            <div class="win-text"><strong>Mobile form friction:</strong> Given mobile accounts for 89.6% of conversions, any form with more than 3 fields is losing leads. Implement click-to-call prominently, and use a single-step form (Name + Phone + Damage Type). Test Google Lead Form extensions.</div>
+          </div>
+          <div class="win-item">
+            <div class="win-icon">5</div>
+            <div class="win-text"><strong>Page speed critical:</strong> Mobile speed scores show "--" (not measured). A 1-second delay in mobile load time reduces conversions by up to 20%. Run Core Web Vitals audit via Google PageSpeed Insights and target sub-3-second LCP on mobile.</div>
+          </div>
+          <div class="win-item">
+            <div class="win-icon">6</div>
+            <div class="win-text"><strong>Trust signals above the fold:</strong> Add client testimonials, Florida license number, BBB accreditation, and "No Recovery, No Fee" guarantee prominently on all landing pages — insurance claim decisions are high-consideration.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== 9. GEOGRAPHIC ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">09</span>
+      <span class="section-eyebrow">Market Coverage</span>
+    </div>
+    <h2 class="section-title">Geographic Performance Analysis</h2>
+    <div class="divider"></div>
+
+    <div class="chart-grid-2" style="margin-bottom: 24px;">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">Leads by Location</div>
+          <div class="chart-card-sub">Conversions by geographic region</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="locationChart" height="240"></canvas>
+          <div class="chart-insight"><strong>Miami-Dade & Broward</strong> account for 79% of leads. Both markets have strong conversion rates and meaningful CPL separation — Broward at $68.67 CPL vs. Miami-Dade at $164.38. This signals Broward is the more efficient market and deserves increased bid investment.</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">CPL by Location</div>
+          <div class="chart-card-sub">Cost efficiency comparison across markets</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="locationCPLChart" height="240"></canvas>
+          <div class="chart-insight"><strong>Broward County & Orlando</strong> show the most efficient CPL metrics. Tampa at $334.56 CPL has poor ROI and should receive a negative bid modifier of -40%. Palm Beach at $142.94 CPL with 5 leads is a viable growth market with dedicated geo landing pages.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom: 16px;">
+      <div class="table-header">
+        <span class="table-header-title">Geographic Breakdown · All Tracked Locations</span>
+        <span class="table-badge">South Florida Focus</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Location</th>
+            <th>Clicks</th>
+            <th>Spend</th>
+            <th>Leads</th>
+            <th>CPL</th>
+            <th>Priority</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Miami-Dade County, FL</strong></td>
+            <td>222</td>
+            <td>$2,959</td>
+            <td>18</td>
+            <td>$164.38</td>
+            <td><span class="pill green">Core Market</span></td>
+          </tr>
+          <tr>
+            <td><strong>Broward County, FL</strong></td>
+            <td>74</td>
+            <td>$1,099</td>
+            <td>16</td>
+            <td><strong>$68.67</strong></td>
+            <td><span class="pill gold">Scale Up</span></td>
+          </tr>
+          <tr>
+            <td><strong>Palm Beach County, FL</strong></td>
+            <td>50</td>
+            <td>$715</td>
+            <td>5</td>
+            <td>$142.94</td>
+            <td><span class="pill green">Expand</span></td>
+          </tr>
+          <tr>
+            <td><strong>Orlando, FL</strong></td>
+            <td>24</td>
+            <td>$366</td>
+            <td>5</td>
+            <td>$73.25</td>
+            <td><span class="pill gold">Scale Up</span></td>
+          </tr>
+          <tr>
+            <td><strong>United States (Broad)</strong></td>
+            <td>36</td>
+            <td>$139</td>
+            <td>3</td>
+            <td>$46.48</td>
+            <td><span class="pill amber">Review</span></td>
+          </tr>
+          <tr>
+            <td><strong>Tampa, FL</strong></td>
+            <td>23</td>
+            <td>$335</td>
+            <td>1</td>
+            <td>$334.56</td>
+            <td><span class="pill red">Reduce Bids</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 10. AUCTION INSIGHTS ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">10</span>
+      <span class="section-eyebrow">Competitive Landscape</span>
+    </div>
+    <h2 class="section-title">Competitor &amp; Auction Insights</h2>
+    <div class="divider"></div>
+
+    <div class="chart-grid-2" style="margin-bottom: 24px;">
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">Top-of-Page Rate by Competitor</div>
+          <div class="chart-card-sub">% of auctions where each domain appeared at top of page</div>
+        </div>
+        <div class="chart-card-body">
+          <div class="comp-bar-wrap">
+            <div class="comp-bar-row">
+              <div class="comp-bar-name">stellaradjusting.com</div>
+              <div class="comp-bar-track"><div class="comp-bar-fill" style="width: 86.35%"></div></div>
+              <div class="comp-bar-pct">86.35%</div>
+            </div>
+            <div class="comp-bar-row">
+              <div class="comp-bar-name">recovery-claim.com</div>
+              <div class="comp-bar-track"><div class="comp-bar-fill" style="width: 81.49%"></div></div>
+              <div class="comp-bar-pct">81.49%</div>
+            </div>
+            <div class="comp-bar-row">
+              <div class="comp-bar-name">fightforyourclaim.com</div>
+              <div class="comp-bar-track"><div class="comp-bar-fill" style="width: 73.60%"></div></div>
+              <div class="comp-bar-pct">73.60%</div>
+            </div>
+            <div class="comp-bar-row">
+              <div class="comp-bar-name">alphapia.com</div>
+              <div class="comp-bar-track"><div class="comp-bar-fill" style="width: 68.02%"></div></div>
+              <div class="comp-bar-pct">68.02%</div>
+            </div>
+            <div class="comp-bar-row">
+              <div class="comp-bar-name">yourinsuranceattorney.com</div>
+              <div class="comp-bar-track"><div class="comp-bar-fill" style="width: 65.97%"></div></div>
+              <div class="comp-bar-pct">65.97%</div>
+            </div>
+            <div class="comp-bar-row">
+              <div class="comp-bar-name you">Foremost PA (You)</div>
+              <div class="comp-bar-track"><div class="comp-bar-fill you" style="width: 62.04%"></div></div>
+              <div class="comp-bar-pct you">62.04%</div>
+            </div>
+          </div>
+          <div class="chart-insight"><strong>Competitive gap:</strong> Foremost is competitive in top-of-page rate (62%) but captures only 23% impression share. This means the campaign is showing at the top when it competes, but is losing many auctions entirely — a budget/bidding constraint issue.</div>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-card-header">
+          <div class="chart-card-title">Impression Share &amp; Outranking Share</div>
+          <div class="chart-card-sub">Who ranks above Foremost most frequently</div>
+        </div>
+        <div class="chart-card-body">
+          <canvas id="auctionChart" height="200"></canvas>
+          <div class="chart-insight"><strong>yourinsuranceattorney.com</strong> outranks Foremost in 22.45% of shared auctions. Note that this is a law firm — a different service category, indicating Foremost's keywords are too broad in some auction environments. Recovery-claim.com is the most dangerous competitor with 21.35% outranking share and 9.94% overlap rate, appearing in roughly 1 in 10 of Foremost's auctions.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="table-wrap" style="margin-bottom: 16px;">
+      <div class="table-header">
+        <span class="table-header-title">Auction Insights Data · Full Competitor View</span>
+        <span class="table-badge">Jan–Jun 2026</span>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Advertiser</th>
+            <th>Impression Share</th>
+            <th>Top-of-Page Rate</th>
+            <th>Overlap Rate</th>
+            <th>Outranking Share</th>
+            <th>Position Above Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: rgba(201,168,76,0.06);">
+            <td><strong>⭐ Foremost PA (You)</strong></td>
+            <td><strong>23.03%</strong></td>
+            <td>62.04%</td>
+            <td>—</td>
+            <td>—</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td>stellaradjusting.com</td>
+            <td>&lt; 10%</td>
+            <td>86.35%</td>
+            <td>8.85%</td>
+            <td>21.29%</td>
+            <td>85.40%</td>
+          </tr>
+          <tr>
+            <td>alphapia.com</td>
+            <td>&lt; 10%</td>
+            <td>68.02%</td>
+            <td>6.37%</td>
+            <td>22.20%</td>
+            <td>56.78%</td>
+          </tr>
+          <tr>
+            <td>yourinsuranceattorney.com</td>
+            <td>&lt; 10%</td>
+            <td>65.97%</td>
+            <td>6.68%</td>
+            <td>22.45%</td>
+            <td>37.54%</td>
+          </tr>
+          <tr>
+            <td>fightforyourclaim.com</td>
+            <td>&lt; 10%</td>
+            <td>73.60%</td>
+            <td>8.36%</td>
+            <td>22.05%</td>
+            <td>50.96%</td>
+          </tr>
+          <tr>
+            <td>recovery-claim.com</td>
+            <td>&lt; 10%</td>
+            <td>81.49%</td>
+            <td>9.94%</td>
+            <td>21.35%</td>
+            <td>73.58%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ===== 12. STRATEGIC RECOMMENDATIONS ===== -->
+  <div class="section">
+    <div class="section-label">
+      <span class="section-num">11</span>
+      <span class="section-eyebrow">Action Plan</span>
+    </div>
+    <h2 class="section-title">Strategic Recommendations</h2>
+    <div class="divider"></div>
+
+    <div style="margin-bottom: 8px;">
+      <div class="exec-card-label" style="font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 16px;">🔴 5 Immediate Optimizations (This Week)</div>
+    </div>
+    <div class="rec-grid" style="margin-bottom: 32px;">
+      <div class="rec-card">
+        <div class="rec-num">01</div>
+        <div class="rec-content">
+          <div class="rec-priority urgent">Urgent · Pre-Hurricane Season</div>
+          <div class="rec-title">Diagnose & Fix the May CVR Drop</div>
+          <div class="rec-text">Audit landing pages active in May vs. April in GA4 and Hotjar. Compare form analytics — look for new drop-off points. A/B test restoring April's LP state. CVR dropped 10.27% → 7.50% with identical spend. Must restore to April levels before June hurricane demand peaks.</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">02</div>
+        <div class="rec-content">
+          <div class="rec-priority urgent">Urgent · Budget Waste</div>
+          <div class="rec-title">Add 15+ Negative Keywords Immediately</div>
+          <div class="rec-text">Exclude: "foremost insurance," "foremost rv," "title company," "title agency," "workers comp," "claim pros," "lemonade insurance," "assurance insurance," all competitor brand names. Estimated weekly savings: $120–180 redirected to high-intent terms.</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">03</div>
+        <div class="rec-content">
+          <div class="rec-priority urgent">Urgent · Mobile CRO</div>
+          <div class="rec-title">Apply –35% Desktop Bid Modifier</div>
+          <div class="rec-text">Desktop CPL is $397.95 vs. mobile $92.83 — a 4.3× gap. Reduce desktop bids by 35% immediately and reallocate that budget to mobile. Simultaneously add a prominent click-to-call button and simplify the mobile form to 3 fields (Name, Phone, Damage Type).</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">04</div>
+        <div class="rec-content">
+          <div class="rec-priority urgent">High Priority</div>
+          <div class="rec-title">Scale the HTS All Services Campaign</div>
+          <div class="rec-text">The June 10 campaign is generating leads at $48.06 CPL — the lowest in the account. Increase its daily budget from $20 → $40/day immediately. Add 10–15 high-intent keywords ("water damage claim adjuster," "hurricane damage claim near me," "roof claim adjuster Florida").</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">05</div>
+        <div class="rec-content">
+          <div class="rec-priority urgent">High Priority</div>
+          <div class="rec-title">Bid Up "Insurance Adjusters Near Me" by 25%</div>
+          <div class="rec-text">This single phrase match keyword generated 5 leads at $82.38 CPL with 15.15% CVR — the account's best-performing keyword by volume and efficiency. Increase bids by 25%, add geographic qualifiers, and replicate across all active campaigns.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-bottom: 8px;">
+      <div class="exec-card-label" style="font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--green); margin-bottom: 16px;">🟢 5 Growth Opportunities (Next 30–60 Days)</div>
+    </div>
+    <div class="rec-grid" style="margin-bottom: 32px;">
+      <div class="rec-card">
+        <div class="rec-num">06</div>
+        <div class="rec-content">
+          <div class="rec-priority medium">Growth · Q3 2026</div>
+          <div class="rec-title">Build Dedicated Hurricane Season Campaign</div>
+          <div class="rec-text">Create a separate campaign targeting "hurricane damage claim," "storm damage adjuster," "wind damage insurance claim South Florida." Build storm-responsive landing pages activatable within 24 hours of a named storm. Pre-authorize surge budget of +40% for storm windows.</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">07</div>
+        <div class="rec-content">
+          <div class="rec-priority medium">Growth · Attribution</div>
+          <div class="rec-title">Implement Pipeline ROAS Attribution Model</div>
+          <div class="rec-text">Current ROAS (0.41–0.58) understates true value. Build a 3-stage offline conversion model: (1) Lead Created, (2) Client Signed (2–4 week lag), (3) Claim Settled + Fee Collected (3–12 month lag). Import Stages 2 & 3 into Google Ads to enable Target ROAS bidding.</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">08</div>
+        <div class="rec-content">
+          <div class="rec-priority medium">Growth · Geography</div>
+          <div class="rec-title">Expand to Broward + Palm Beach with Geo Pages</div>
+          <div class="rec-text">Broward converts at $68.67 CPL (the account's best) and Palm Beach delivers 5 leads at $142.94. Build /fort-lauderdale/, /boca-raton/, and /palm-beach/ landing pages. Increase Broward bid adjustments by +15% and Palm Beach by +10%.</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">09</div>
+        <div class="rec-content">
+          <div class="rec-priority medium">Growth · Lead Quality</div>
+          <div class="rec-title">Add Google Lead Form Extensions</div>
+          <div class="rec-text">Lead form extensions allow prospects to submit contact details directly within the Google SERP on mobile without visiting the landing page. This reduces friction significantly for mobile users. Implement for all campaigns with a "Get Free Claim Review" CTA. Expected CPL reduction: 15–25%.</div>
+        </div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num">10</div>
+        <div class="rec-content">
+          <div class="rec-priority medium">Growth · Remarketing</div>
+          <div class="rec-title">Deploy RLSA Remarketing Layer</div>
+          <div class="rec-text">Build RLSA audiences of: (1) LP visitors who did not convert (30-day window), (2) visitors who viewed /type-of-claims/ or /damage/ pages (high intent). Serve objection-handling copy: "Still deciding? No fees unless we win your claim." Expected 30–50% lower CPL for remarketing audience.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="strategy-grid" style="margin-bottom: 24px;">
+      <div class="strategy-card">
+        <div class="strategy-icon">💰</div>
+        <div class="strategy-title">Budget Allocation Strategy</div>
+        <ul class="strategy-items">
+          <li>CT AN DSA: $45/day → primary growth engine</li>
+          <li>HTS All Services: $40/day → new high-intent expansion</li>
+          <li>Local &amp; Near Me: $10/day → hold while learning</li>
+          <li>Hurricane Season (June 1): +40% surge provisioned</li>
+          <li>Total recommended: $95/day ($2,850/month)</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-icon">🌀</div>
+        <div class="strategy-title">Hurricane Season Strategy</div>
+        <ul class="strategy-items">
+          <li>Pre-build storm-specific LP variants (activatable in 24hr)</li>
+          <li>Target: "hurricane [name] damage claim Florida"</li>
+          <li>Set automated bid rules for NWS storm alert periods</li>
+          <li>Surge budget of +$800–1,200/month post-landfall</li>
+          <li>Partner with roofing contractors for referral keywords</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <div class="strategy-icon">🎯</div>
+        <div class="strategy-title">Lead Quality Improvement</div>
+        <ul class="strategy-items">
+          <li>Add damage type qualifier in lead form (Water/Roof/Hurricane)</li>
+          <li>Implement CallRail for call tracking & recording</li>
+          <li>Build lead scoring: property type + claim type + insurer</li>
+          <li>Exclude "job," "career," "salary," "how to become" intent</li>
+          <li>Feed quality scores back to Google Ads as conversion values</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CONCLUSION ===== -->
+  <div class="conclusion">
+    <div class="conclusion-title">Executive Conclusion</div>
+    <p class="conclusion-text">
+      Foremost Public Adjusters has demonstrated consistent campaign maturation over the January–May 2026 reporting period, achieving a 40% reduction in Cost Per Lead and near-doubling of conversion rates without any corresponding increase in media investment. These efficiency gains validate the ongoing optimization work and confirm that the account's targeting and ad-to-landing-page alignment are improving quarter-over-quarter.
+    </p>
+    <p class="conclusion-text">
+      April 2026 established the performance benchmark the account should return to and surpass: 15 leads at $114 CPL with 10.27% CVR. The May pullback, while concerning, is diagnostic in nature — stable CPC, CTR, and spend isolate the issue to a post-click conversion experience change rather than any market or competitive shift. Addressing this before June 1 hurricane season is the campaign's single highest-priority action.
+    </p>
+    <p class="conclusion-text">
+      The account's critical growth leverage points are: (1) significantly underfunded impression share at 23% versus competitors operating at &lt;10% but appearing at top of page 65–86% of the time; (2) the HTS All Services campaign generating leads at $48 CPL and requiring immediate scale; and (3) the mobile-first opportunity — a device segment driving 89.6% of conversions at $92.83 CPL that warrants dedicated bid strategies, form optimization, and lead form extensions. Foremost enters hurricane season with strong campaign fundamentals and a clear roadmap to sub-$120 CPL at scale.
+    </p>
+
+    <div class="conclusion-sig">
+      <div>
+        <div class="conclusion-sig-name">Prepared by Daniel Deepak</div>
+        <div class="conclusion-sig-title">Senior Performance Marketing &amp; Growth Consultant · dannygrowthmarketing.com</div>
+      </div>
+      <div class="conclusion-sig-date">June 2026 · Confidential</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ===== CHART DEFAULTS =====
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.padding = 16;
+
+const NAVY = '#0B1F3A';
+const GOLD = '#C9A84C';
+const GOLD_L = '#E2C97E';
+const GREEN = '#1A7F4E';
+const RED = '#B91C1C';
+const AMBER = '#D97706';
+const GRAY = '#ADB5BD';
+
+const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May'];
+
+// 1. Leads + CVR Trend
+new Chart(document.getElementById('leadsChart'), {
+  data: {
+    labels: months,
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Leads',
+        data: [9, 7, 13, 15, 12],
+        backgroundColor: [
+          'rgba(11,31,58,0.7)', 'rgba(11,31,58,0.5)', 'rgba(11,31,58,0.7)',
+          'rgba(201,168,76,0.9)', 'rgba(11,31,58,0.6)'
+        ],
+        borderRadius: 3,
+        yAxisID: 'y',
+      },
+      {
+        type: 'line',
+        label: 'Conv. Rate %',
+        data: [5.66, 4.46, 8.13, 10.27, 7.50],
+        borderColor: GOLD,
+        backgroundColor: 'rgba(201,168,76,0.1)',
+        borderWidth: 2.5,
+        pointBackgroundColor: GOLD,
+        pointRadius: 5,
+        tension: 0.3,
+        yAxisID: 'y1',
+        fill: true
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' }
+    },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Leads' }, grid: { color: '#F1F3F5' } },
+      y1: { position: 'right', beginAtZero: true, title: { display: true, text: 'CVR %' }, grid: { drawOnChartArea: false } }
+    }
+  }
+});
+
+// 2. CPL Trend
+new Chart(document.getElementById('cplChart'), {
+  type: 'bar',
+  data: {
+    labels: months,
+    datasets: [{
+      label: 'Cost Per Lead ($)',
+      data: [190, 208.57, 132.31, 114, 143.33],
+      backgroundColor: [AMBER, RED, '#6B7280', GOLD, AMBER],
+      borderRadius: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => '$' + ctx.raw.toFixed(2) } }
+    },
+    scales: {
+      y: { beginAtZero: false, min: 80, title: { display: true, text: 'CPL ($)' }, grid: { color: '#F1F3F5' } }
+    }
+  }
+});
+
+// 3. Spend vs Leads Combo
+new Chart(document.getElementById('spendLeadsChart'), {
+  data: {
+    labels: months,
+    datasets: [
+      {
+        type: 'bar',
+        label: 'Monthly Spend ($)',
+        data: [1710, 1460, 1720, 1710, 1720],
+        backgroundColor: 'rgba(11,31,58,0.15)',
+        borderColor: NAVY,
+        borderWidth: 1,
+        borderRadius: 3,
+        yAxisID: 'y'
+      },
+      {
+        type: 'line',
+        label: 'Leads',
+        data: [9, 7, 13, 15, 12],
+        borderColor: GOLD,
+        backgroundColor: 'rgba(201,168,76,0.1)',
+        borderWidth: 2.5,
+        pointBackgroundColor: GOLD,
+        pointRadius: 6,
+        tension: 0.3,
+        yAxisID: 'y1',
+        fill: false
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { beginAtZero: true, title: { display: true, text: 'Spend ($)' }, grid: { color: '#F1F3F5' } },
+      y1: { position: 'right', beginAtZero: true, title: { display: true, text: 'Leads' }, grid: { drawOnChartArea: false } }
+    }
+  }
+});
+
+// 4. Campaign Leads
+new Chart(document.getElementById('campaignLeadsChart'), {
+  type: 'bar',
+  data: {
+    labels: ['CT AN DSA', 'Local & Near Me', 'HTS All Services'],
+    datasets: [{
+      label: 'Total Leads',
+      data: [36, 9, 3],
+      backgroundColor: [GOLD, NAVY, '#6B7280'],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { beginAtZero: true, grid: { color: '#F1F3F5' } }
+    }
+  }
+});
+
+// 5. Campaign CPL
+new Chart(document.getElementById('campaignCPLChart'), {
+  type: 'bar',
+  data: {
+    labels: ['HTS All Services', 'CT AN DSA', 'Local & Near Me'],
+    datasets: [{
+      label: 'CPL ($)',
+      data: [48.06, 108.78, 178.51],
+      backgroundColor: [GREEN, GOLD, RED],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => '$' + ctx.raw.toFixed(2) } }
+    },
+    scales: {
+      x: { beginAtZero: true, grid: { color: '#F1F3F5' } }
+    }
+  }
+});
+
+// 6. Device Pie
+new Chart(document.getElementById('devicePieChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Mobile (43)', 'Desktop (4)', 'Tablet (1)'],
+    datasets: [{
+      data: [43, 4, 1],
+      backgroundColor: [GREEN, RED, AMBER],
+      borderWidth: 2,
+      borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: { callbacks: { label: ctx => ctx.label + ' leads (' + ((ctx.raw/48)*100).toFixed(1) + '%)' } }
+    },
+    cutout: '55%'
+  }
+});
+
+// 7. Device CPL
+new Chart(document.getElementById('deviceCPLChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Mobile', 'Tablet', 'Desktop'],
+    datasets: [{
+      label: 'CPL ($)',
+      data: [92.83, 83.48, 397.95],
+      backgroundColor: [GREEN, AMBER, RED],
+      borderRadius: 4
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => '$' + ctx.raw.toFixed(2) } }
+    },
+    scales: {
+      y: { beginAtZero: true, grid: { color: '#F1F3F5' } }
+    }
+  }
+});
+
+// 8. Search Terms Bar
+new Chart(document.getElementById('searchTermsChart'), {
+  type: 'bar',
+  data: {
+    labels: [
+      'insurance adjusters near me',
+      'public adjuster near me',
+      'public adjuster',
+      'encore public adjusters',
+      'adjuster insurance',
+      'loss adjuster near me',
+      'pub. insurance adj. near me',
+      'ind. insurance adj. near me'
+    ],
+    datasets: [{
+      label: 'Leads',
+      data: [5, 2, 2, 2, 2, 1, 1, 1],
+      backgroundColor: [GOLD, GOLD, GOLD, '#6B7280', '#6B7280', NAVY, NAVY, NAVY],
+      borderRadius: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { grid: { color: '#F1F3F5' }, ticks: { maxRotation: 25, font: { size: 11 } } },
+      y: { beginAtZero: true, ticks: { stepSize: 1 }, grid: { color: '#F1F3F5' } }
+    }
+  }
+});
+
+// 9. Location Chart
+new Chart(document.getElementById('locationChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Miami-Dade', 'Broward', 'Palm Beach', 'Orlando', 'Other', 'Tampa'],
+    datasets: [{
+      label: 'Leads',
+      data: [18, 16, 5, 5, 3, 1],
+      backgroundColor: [GOLD, GOLD, NAVY, NAVY, GRAY, RED],
+      borderRadius: 3
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      x: { beginAtZero: true, grid: { color: '#F1F3F5' } }
+    }
+  }
+});
+
+// 10. Location CPL
+new Chart(document.getElementById('locationCPLChart'), {
+  type: 'bar',
+  data: {
+    labels: ['Broward', 'Orlando', 'Other', 'Palm Beach', 'Miami-Dade', 'Tampa'],
+    datasets: [{
+      label: 'CPL ($)',
+      data: [68.67, 73.25, 46.48, 142.94, 164.38, 334.56],
+      backgroundColor: [GREEN, GREEN, GREEN, AMBER, AMBER, RED],
+      borderRadius: 3
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => '$' + ctx.raw.toFixed(2) } }
+    },
+    scales: {
+      x: { beginAtZero: true, grid: { color: '#F1F3F5' } }
+    }
+  }
+});
+
+// 11. Auction Insights
+new Chart(document.getElementById('auctionChart'), {
+  type: 'bar',
+  data: {
+    labels: ['yourinsuranceattorney.com', 'alphapia.com', 'fightforyourclaim.com', 'recovery-claim.com', 'stellaradjusting.com'],
+    datasets: [{
+      label: 'Outranking Share (%)',
+      data: [22.45, 22.20, 22.05, 21.35, 21.29],
+      backgroundColor: [RED, AMBER, AMBER, RED, RED],
+      borderRadius: 3
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => ctx.raw + '% outranking share' } }
+    },
+    scales: {
+      x: { beginAtZero: true, max: 30, grid: { color: '#F1F3F5' } }
+    }
+  }
+});
+</script>
+</body>
+</html>
