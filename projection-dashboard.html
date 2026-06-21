@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foremost PA — Campaign Projection Model</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap');
+
+  :root {
+    --navy: #0F2042;
+    --navy-deep: #081428;
+    --blue: #2D5FE0;
+    --blue-light: #E8EEFD;
+    --amber: #E8A33D;
+    --amber-deep: #C7822A;
+    --green: #1F8A5F;
+    --green-light: #E3F6ED;
+    --red: #C8503D;
+    --paper: #F6F4EF;
+    --ink: #1B2333;
+    --ink-soft: #5B6478;
+    --line: #DDD8CB;
+    --white: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    padding: 0;
+  }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 48px 28px 80px;
+  }
+
+  /* ── Header ───────────────────────────────────── */
+  .masthead {
+    border-bottom: 3px solid var(--navy);
+    padding-bottom: 28px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .masthead-left .kicker {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--amber-deep);
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+  .masthead-left h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: 42px;
+    color: var(--navy);
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .masthead-left .sub {
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-top: 8px;
+  }
+  .masthead-right {
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .masthead-right .badge {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--white);
+    padding: 5px 12px;
+    border-radius: 3px;
+    font-weight: 600;
+    margin-bottom: 6px;
+  }
+
+  /* ── Layout grid ──────────────────────────────── */
+  .grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 32px;
+  }
+  @media (max-width: 880px) {
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Control panel ────────────────────────────── */
+  .panel {
+    background: var(--navy);
+    border-radius: 6px;
+    padding: 30px 26px;
+    color: var(--white);
+    position: sticky;
+    top: 24px;
+    height: fit-content;
+  }
+  .panel h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .panel .panel-sub {
+    font-size: 12.5px;
+    color: #9FB0D6;
+    margin-bottom: 26px;
+  }
+  .field {
+    margin-bottom: 24px;
+  }
+  .field label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #D6DEF2;
+  }
+  .field label .val {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--amber);
+    font-size: 14px;
+  }
+  input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: #2A4070;
+    outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--amber);
+    border: 3px solid var(--navy);
+    cursor: pointer;
+    box-shadow: 0 0 0 1px var(--amber);
+  }
+  input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--amber);
+    border: 3px solid var(--navy);
+    cursor: pointer;
+  }
+  .field .range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    color: #6E80AC;
+    margin-top: 6px;
+  }
+  .scenario-row {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+  .scenario-btn {
+    flex: 1;
+    background: #16284D;
+    border: 1px solid #2A4070;
+    color: #B9C5E3;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 9px 6px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .scenario-btn:hover { border-color: var(--amber); color: var(--white); }
+  .scenario-btn.active { background: var(--amber); border-color: var(--amber); color: var(--navy-deep); }
+
+  .panel-note {
+    font-size: 11.5px;
+    color: #7C8DB5;
+    line-height: 1.6;
+    border-top: 1px solid #233763;
+    padding-top: 18px;
+    margin-top: 4px;
+  }
+
+  /* ── Results column ───────────────────────────── */
+  .results { min-width: 0; }
+
+  .headline-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  @media (max-width: 700px) {
+    .headline-stats { grid-template-columns: repeat(2, 1fr); }
+  }
+  .stat {
+    background: var(--white);
+    padding: 22px 18px;
+  }
+  .stat .label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  .stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .stat .num.amber { color: var(--amber-deep); }
+  .stat .num.green { color: var(--green); }
+  .stat .delta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    margin-top: 6px;
+    color: var(--ink-soft);
+  }
+
+  section.block {
+    margin-bottom: 36px;
+  }
+  .block-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .block-desc {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+  }
+
+  /* ── Campaign split bars ──────────────────────── */
+  .campaign-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+  }
+  .campaign-card .top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .campaign-card .name {
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--navy);
+  }
+  .campaign-card .tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    background: var(--blue-light);
+    color: var(--blue);
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 8px;
+  }
+  .campaign-card .figures {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+  }
+  .bar-track {
+    height: 8px;
+    background: #EFEBE0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 10px;
+  }
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  /* ── Lead share table ─────────────────────────── */
+  .share-table {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .share-row {
+    display: grid;
+    grid-template-columns: 1fr 90px 110px;
+    align-items: center;
+    padding: 13px 20px;
+    border-bottom: 1px solid var(--line);
+    gap: 14px;
+  }
+  .share-row:last-child { border-bottom: none; }
+  .share-row.header {
+    background: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+  }
+  .share-row .svc { font-weight: 600; font-size: 13.5px; }
+  .share-row .pct { font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: var(--ink-soft); }
+  .share-row .leads { font-family: 'IBM Plex Mono', monospace; font-size: 13px; font-weight: 600; color: var(--navy); text-align: right; }
+  .mini-bar-track { height: 5px; background: #EFEBE0; border-radius: 3px; overflow: hidden; grid-column: 1 / -1; margin-top: -6px; margin-bottom: 2px; }
+  .mini-bar-fill { height: 100%; background: var(--blue); border-radius: 3px; }
+
+  /* ── Sensitivity chart ─────────────────────────── */
+  .chart-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 24px 26px 18px;
+  }
+  svg text { font-family: 'IBM Plex Mono', monospace; }
+
+  /* ── Footer ───────────────────────────────────── */
+  footer {
+    margin-top: 56px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    line-height: 1.7;
+  }
+  footer strong { color: var(--ink); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="masthead-left">
+      <div class="kicker">Foremost Public Adjusters</div>
+      <h1>Campaign Projection Model</h1>
+      <div class="sub">Lead volume &amp; cost-per-lead forecast across all 3 active Google Ads campaigns</div>
+    </div>
+    <div class="masthead-right">
+      <div class="badge">$2,700 / month baseline</div>
+      <div>South Florida · No Recovery, No Fee</div>
+    </div>
+  </div>
+
+  <div class="grid">
+
+    <!-- CONTROL PANEL -->
+    <div class="panel">
+      <h2>Adjust the model</h2>
+      <div class="panel-sub">Drag to test scenarios against the $122 historical CPL baseline.</div>
+
+      <div class="scenario-row">
+        <button class="scenario-btn" data-scenario="conservative">Conservative</button>
+        <button class="scenario-btn active" data-scenario="baseline">Baseline</button>
+        <button class="scenario-btn" data-scenario="optimized">Optimized</button>
+      </div>
+
+      <div class="field">
+        <label>Monthly budget <span class="val" id="budgetVal">$2,700</span></label>
+        <input type="range" id="budget" min="1500" max="6000" step="50" value="2700">
+        <div class="range-labels"><span>$1,500</span><span>$6,000</span></div>
+      </div>
+
+      <div class="field">
+        <label>Average cost per lead <span class="val" id="cplVal">$122</span></label>
+        <input type="range" id="cpl" min="70" max="180" step="1" value="122">
+        <div class="range-labels"><span>$70</span><span>$180</span></div>
+      </div>
+
+      <div class="field">
+        <label>Mobile traffic share <span class="val" id="mobileVal">95%</span></label>
+        <input type="range" id="mobile" min="60" max="100" step="1" value="95">
+        <div class="range-labels"><span>60%</span><span>100%</span></div>
+      </div>
+
+      <div class="field">
+        <label>Lead-to-signed-claim rate <span class="val" id="closeVal">25%</span></label>
+        <input type="range" id="close" min="10" max="50" step="1" value="25">
+        <div class="range-labels"><span>10%</span><span>50%</span></div>
+      </div>
+
+      <div class="panel-note">
+        Baseline CPL ($122) and mobile share (95%) are pulled directly from account history. Close rate is unset historically — defaulted to 25%, a typical range for public-adjuster intake; adjust to match your actual sales data.
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results">
+
+      <div class="headline-stats">
+        <div class="stat">
+          <div class="label">Projected leads / mo</div>
+          <div class="num" id="statLeads">22</div>
+          <div class="delta" id="statLeadsDelta">vs. 45 historical (90-day window)</div>
+        </div>
+        <div class="stat">
+          <div class="label">Blended CPL</div>
+          <div class="num amber" id="statCPL">$122</div>
+          <div class="delta">at current budget split</div>
+        </div>
+        <div class="stat">
+          <div class="label">Mobile leads / mo</div>
+          <div class="num" id="statMobile">21</div>
+          <div class="delta" id="statMobileDelta">95% of total</div>
+        </div>
+        <div class="stat">
+          <div class="label">Signed claims / mo</div>
+          <div class="num green" id="statClaims">5</div>
+          <div class="delta" id="statClaimsDelta">at 25% close rate</div>
+        </div>
+      </div>
+
+      <section class="block">
+        <div class="block-title">Budget &amp; lead split by campaign</div>
+        <div class="block-desc">Each campaign's share of spend, scaled to your budget slider, with projected leads at the blended CPL.</div>
+
+        <div class="campaign-card">
+          <div class="top-row">
+            <div><span class="name">Public Adjuster &amp; Claim Help</span><span class="tag">Search · Highest Intent</span></div>
+            <div class="figures" id="c1-figures">$45/day · 11 leads/mo</div>
+          </div>
+          <div class="bar-track"><div class="bar-fill" id="c1-bar" style="width:50%; background:var(--blue);"></div></div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="top-row">
+            <div><span class="name">Property Damage Claims</span><span class="tag">Search · Service Intent</span></div>
+            <div class="figures" id="c2-figures">$20/day · 5 leads/mo</div>
+          </div>
+          <div class="bar-track"><div class="bar-fill" id="c2-bar" style="width:22%; background:var(--green);"></div></div>
+        </div>
+
+        <div class="campaign-card">
+          <div class="top-row">
+            <div><span class="name">All Services Expansion</span><span class="tag">PMax · Demand Capture</span></div>
+            <div class="figures" id="c3-figures">$25/day · 6 leads/mo</div>
+          </div>
+          <div class="bar-track"><div class="bar-fill" id="c3-bar" style="width:28%; background:var(--amber);"></div></div>
+        </div>
+      </section>
+
+      <section class="block">
+        <div class="block-title">Where leads land, by service</div>
+        <div class="block-desc">Applies the account's expected lead-share percentages to your projected monthly total.</div>
+        <div class="share-table" id="shareTable"></div>
+      </section>
+
+      <section class="block">
+        <div class="block-title">Budget sensitivity</div>
+        <div class="block-desc">How projected monthly leads change as budget scales, holding CPL constant at your current slider value.</div>
+        <div class="chart-card">
+          <svg id="sensChart" viewBox="0 0 1000 280" width="100%" height="280"></svg>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <footer>
+    <strong>Methodology:</strong> Leads/mo = monthly budget ÷ cost per lead. Campaign split follows the account's existing 50% / 22% / 28% spend allocation ($45 / $20 / $25 daily) unless you change the total budget, in which case each campaign scales proportionally. Service-level lead share uses the account's historical distribution (Public Adjuster 35%, Water Damage 25%, Roof Damage 15%, Hurricane/Storm 15%, Denied Claims 5%, Fire Damage 5%). This is a planning model, not a guarantee — real CPL moves with seasonality, competitor bidding, and landing page conversion rate, and hurricane season (Jun–Nov) typically shifts demand sharply toward storm-related ad groups.
+  </footer>
+
+</div>
+
+<script>
+(function() {
+  const budgetSlider = document.getElementById('budget');
+  const cplSlider = document.getElementById('cpl');
+  const mobileSlider = document.getElementById('mobile');
+  const closeSlider = document.getElementById('close');
+
+  const budgetVal = document.getElementById('budgetVal');
+  const cplVal = document.getElementById('cplVal');
+  const mobileVal = document.getElementById('mobileVal');
+  const closeVal = document.getElementById('closeVal');
+
+  const campaignSplit = [
+    { key: 'c1', name: 'Public Adjuster & Claim Help', share: 45/90, color: 'var(--blue)' },
+    { key: 'c2', name: 'Property Damage Claims', share: 20/90, color: 'var(--green)' },
+    { key: 'c3', name: 'All Services Expansion', share: 25/90, color: 'var(--amber)' },
+  ];
+
+  const leadShare = [
+    { service: 'Public Adjuster / Claim Help', share: 0.35 },
+    { service: 'Water Damage', share: 0.25 },
+    { service: 'Roof Damage', share: 0.15 },
+    { service: 'Hurricane / Storm', share: 0.15 },
+    { service: 'Denied Claims', share: 0.05 },
+    { service: 'Fire Damage', share: 0.05 },
+  ];
+
+  const scenarios = {
+    conservative: { budget: 2700, cpl: 150, mobile: 90, close: 18 },
+    baseline:     { budget: 2700, cpl: 122, mobile: 95, close: 25 },
+    optimized:    { budget: 2700, cpl: 95,  mobile: 96, close: 32 },
+  };
+
+  function fmtMoney(n) {
+    return '$' + Math.round(n).toLocaleString('en-US');
+  }
+
+  function buildShareTable() {
+    const table = document.getElementById('shareTable');
+    let html = '<div class="share-row header"><div>Service</div><div>Share</div><div style="text-align:right">Leads / mo</div></div>';
+    table.innerHTML = html;
+  }
+
+  function render() {
+    const budget = parseFloat(budgetSlider.value);
+    const cpl = parseFloat(cplSlider.value);
+    const mobile = parseFloat(mobileSlider.value);
+    const close = parseFloat(closeSlider.value);
+
+    budgetVal.textContent = fmtMoney(budget);
+    cplVal.textContent = '$' + cpl;
+    mobileVal.textContent = mobile + '%';
+    closeVal.textContent = close + '%';
+
+    const totalLeads = budget / cpl;
+    const mobileLeads = totalLeads * (mobile / 100);
+    const claims = totalLeads * (close / 100);
+
+    document.getElementById('statLeads').textContent = Math.round(totalLeads);
+    document.getElementById('statCPL').textContent = '$' + cpl;
+    document.getElementById('statMobile').textContent = Math.round(mobileLeads);
+    document.getElementById('statMobileDelta').textContent = mobile + '% of total';
+    document.getElementById('statClaims').textContent = Math.round(claims);
+    document.getElementById('statClaimsDelta').textContent = 'at ' + close + '% close rate';
+
+    const histDeltaPct = Math.round(((totalLeads - 45) / 45) * 100);
+    const deltaSign = histDeltaPct >= 0 ? '+' : '';
+    document.getElementById('statLeadsDelta').textContent = deltaSign + histDeltaPct + '% vs. 45 historical leads';
+
+    // campaign cards
+    campaignSplit.forEach(c => {
+      const campBudget = budget * c.share;
+      const campLeads = campBudget / cpl;
+      const dailyEq = (campBudget / 30).toFixed(0);
+      document.getElementById(c.key + '-figures').textContent =
+        '$' + dailyEq + '/day · ' + campLeads.toFixed(1) + ' leads/mo';
+      document.getElementById(c.key + '-bar').style.width = (c.share * 100).toFixed(0) + '%';
+    });
+
+    // lead share table
+    const table = document.getElementById('shareTable');
+    let html = '<div class="share-row header"><div>Service</div><div>Share</div><div style="text-align:right">Leads / mo</div></div>';
+    leadShare.forEach(s => {
+      const leads = totalLeads * s.share;
+      html += `
+        <div class="share-row">
+          <div class="svc">${s.service}</div>
+          <div class="pct">${(s.share*100).toFixed(0)}%</div>
+          <div class="leads">${leads.toFixed(1)}</div>
+        </div>
+        <div class="mini-bar-track"><div class="mini-bar-fill" style="width:${(s.share*100).toFixed(0)}%"></div></div>
+      `;
+    });
+    table.innerHTML = html;
+
+    drawSensitivityChart(cpl, budget);
+  }
+
+  function drawSensitivityChart(cpl, currentBudget) {
+    const svg = document.getElementById('sensChart');
+    const W = 1000, H = 280;
+    const padL = 60, padR = 30, padT = 20, padB = 40;
+    const plotW = W - padL - padR, plotH = H - padT - padB;
+
+    const minB = 1500, maxB = 6000;
+    const points = [];
+    const steps = 12;
+    for (let i = 0; i <= steps; i++) {
+      const b = minB + (maxB - minB) * (i / steps);
+      const leads = b / cpl;
+      points.push({ b, leads });
+    }
+    const maxLeads = Math.max(...points.map(p => p.leads)) * 1.15;
+
+    function x(b) { return padL + ((b - minB) / (maxB - minB)) * plotW; }
+    function y(l) { return padT + plotH - (l / maxLeads) * plotH; }
+
+    let svgContent = '';
+
+    // gridlines
+    const ySteps = 5;
+    for (let i = 0; i <= ySteps; i++) {
+      const val = (maxLeads / ySteps) * i;
+      const yy = y(val);
+      svgContent += `<line x1="${padL}" y1="${yy}" x2="${W-padR}" y2="${yy}" stroke="#E5E0D2" stroke-width="1"/>`;
+      svgContent += `<text x="${padL-10}" y="${yy+4}" text-anchor="end" font-size="11" fill="#5B6478">${Math.round(val)}</text>`;
+    }
+
+    // x axis labels
+    [minB, 2700, 4000, maxB].forEach(b => {
+      const xx = x(b);
+      svgContent += `<text x="${xx}" y="${H-padB+22}" text-anchor="middle" font-size="11" fill="#5B6478">$${(b/1000).toFixed(1)}k</text>`;
+    });
+
+    // line path
+    let path = 'M ' + points.map(p => `${x(p.b).toFixed(1)},${y(p.leads).toFixed(1)}`).join(' L ');
+    svgContent += `<path d="${path}" fill="none" stroke="#2D5FE0" stroke-width="2.5"/>`;
+
+    // area under line
+    let areaPath = path + ` L ${x(maxB)},${padT+plotH} L ${x(minB)},${padT+plotH} Z`;
+    svgContent += `<path d="${areaPath}" fill="#2D5FE0" opacity="0.07"/>`;
+
+    // current budget marker
+    const curX = x(Math.max(minB, Math.min(maxB, currentBudget)));
+    const curLeads = currentBudget / cpl;
+    const curY = y(curLeads);
+    svgContent += `<line x1="${curX}" y1="${padT}" x2="${curX}" y2="${padT+plotH}" stroke="#E8A33D" stroke-width="1.5" stroke-dasharray="4,3"/>`;
+    svgContent += `<circle cx="${curX}" cy="${curY}" r="6" fill="#E8A33D" stroke="#0F2042" stroke-width="2"/>`;
+    svgContent += `<text x="${curX}" y="${curY-14}" text-anchor="middle" font-size="12" font-weight="600" fill="#0F2042">${curLeads.toFixed(0)} leads</text>`;
+
+    // axis lines
+    svgContent += `<line x1="${padL}" y1="${padT+plotH}" x2="${W-padR}" y2="${padT+plotH}" stroke="#1B2333" stroke-width="1.5"/>`;
+
+    svg.innerHTML = svgContent;
+  }
+
+  [budgetSlider, cplSlider, mobileSlider, closeSlider].forEach(s => {
+    s.addEventListener('input', () => {
+      document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+      render();
+    });
+  });
+
+  document.querySelectorAll('.scenario-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const s = scenarios[btn.dataset.scenario];
+      budgetSlider.value = s.budget;
+      cplSlider.value = s.cpl;
+      mobileSlider.value = s.mobile;
+      closeSlider.value = s.close;
+      render();
+    });
+  });
+
+  buildShareTable();
+  render();
+})();
+</script>
+</body>
+</html>
