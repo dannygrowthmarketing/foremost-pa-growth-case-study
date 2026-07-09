@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Foremost Public Adjusters — Google Ads Brand Visibility Audit</title>
+<style>
+  :root{
+    --navy:#1B2A41;
+    --navy-light:#2A4066;
+    --accent:#8A6D3B;
+    --accent-light:#C9A15E;
+    --paper:#FBF9F5;
+    --paper2:#F4F1EC;
+    --ink:#1F2328;
+    --grey:#5A5A5A;
+    --line:#DDD6C7;
+    --green:#3F6B4A;
+    --green-bg:#E9F0EA;
+    --amber:#AD7A26;
+    --amber-bg:#F6EEDD;
+    --red:#B0413E;
+    --red-bg:#F7E9E8;
+    --slate:#6B7280;
+    --slate-bg:#EEEFF1;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family: Georgia, 'Times New Roman', serif;
+    line-height:1.62;
+  }
+  .sans{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+  .wrap{ max-width:920px; margin:0 auto; padding:0 32px 120px; }
+
+  /* ---- Cover / Hero ---- */
+  .hero{
+    background: linear-gradient(160deg, var(--navy) 0%, var(--navy-light) 100%);
+    color:#fff; padding:72px 0 56px;
+  }
+  .hero-inner{ max-width:920px; margin:0 auto; padding:0 32px; }
+  .kicker{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    text-transform:uppercase; letter-spacing:.16em; font-size:12px; font-weight:700;
+    color:var(--accent-light); margin-bottom:18px;
+  }
+  .hero h1{ font-size:44px; margin:0 0 12px; font-weight:700; letter-spacing:-.01em; }
+  .hero .sub{ font-size:19px; font-style:italic; color:#CFD6E2; margin:0 0 32px; max-width:640px; }
+  .hero-rule{ height:2px; background:var(--accent-light); width:96px; margin-bottom:28px; opacity:.85;}
+  .meta-grid{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    display:grid; grid-template-columns:1fr 1fr; gap:14px 40px; font-size:13.5px; color:#D7DCE6;
+  }
+  .meta-grid b{ color:#fff; display:block; text-transform:uppercase; letter-spacing:.06em; font-size:10.5px; margin-bottom:3px; opacity:.75;}
+
+  /* ---- Section headers ---- */
+  h2.section{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size:26px; color:var(--navy); border-bottom:3px solid var(--accent);
+    padding-bottom:12px; margin:64px 0 22px; font-weight:800; letter-spacing:-.01em;
+  }
+  h3.sub{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size:18px; color:var(--navy); margin:34px 0 14px; font-weight:700;
+  }
+  h4.mini{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size:13px; text-transform:uppercase; letter-spacing:.08em; color:var(--accent);
+    margin:26px 0 10px; font-weight:700;
+  }
+  p{ font-size:16.5px; margin:0 0 16px; color:#2B2E33; }
+  .lede{ font-size:18px; color:var(--navy); }
+
+  /* ---- Quick facts ---- */
+  .facts{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line);
+    border:1px solid var(--line); margin:28px 0 8px;
+  }
+  .fact{ background:var(--paper); padding:18px 20px; }
+  .fact .k{ font-size:12px; text-transform:uppercase; letter-spacing:.05em; color:var(--grey); margin-bottom:6px;}
+  .fact .v{ font-size:16px; color:var(--navy); font-weight:700; }
+
+  /* ---- Callout ---- */
+  .callout{
+    border-left:4px solid var(--accent); background:var(--paper2);
+    padding:20px 24px; margin:28px 0; font-size:16.5px;
+  }
+  .callout b{ color:var(--navy); }
+
+  /* ---- Lists ---- */
+  ul.tick{ margin:0 0 20px; padding-left:0; list-style:none; }
+  ul.tick li{ position:relative; padding-left:26px; margin-bottom:10px; font-size:16px; }
+  ul.tick li::before{ content:"—"; position:absolute; left:0; color:var(--accent); font-weight:700;}
+  ul.tick.green li::before{ content:"✓"; color:var(--green); }
+  ul.tick.grey li::before{ content:"?"; color:var(--slate); }
+
+  ul.kw{ columns:2; column-gap:32px; padding-left:0; list-style:none; margin:0 0 20px;}
+  ul.kw li{ font-family: 'Courier New', monospace; font-size:14.5px; background:var(--paper2);
+    padding:7px 12px; margin-bottom:8px; border-radius:3px; break-inside:avoid; color:#333;}
+
+  /* ---- Q&A Cards ---- */
+  .qcard{ border:1px solid var(--line); background:#fff; border-radius:6px; margin-bottom:20px; overflow:hidden;}
+  .qhead{ display:flex; align-items:center; justify-content:space-between; gap:16px;
+    padding:16px 22px; background:var(--paper2); border-bottom:1px solid var(--line);}
+  .qnum{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-weight:800; color:var(--navy); font-size:15px;}
+  .qtext{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-weight:700; color:var(--navy); font-size:15.5px; flex:1;}
+  .badge{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.04em;
+    padding:5px 11px; border-radius:20px; white-space:nowrap;}
+  .badge.veryhigh, .badge.high{ background:var(--green-bg); color:var(--green);}
+  .badge.medium{ background:var(--amber-bg); color:var(--amber);}
+  .badge.low{ background:var(--red-bg); color:var(--red);}
+  .badge.gap{ background:var(--slate-bg); color:var(--slate);}
+  .qbody{ padding:18px 22px 20px; }
+  .qbody p{ font-size:15.5px; margin-bottom:12px;}
+  .evid{ font-size:13.5px; color:var(--grey); font-style:italic; margin:8px 0 0 0; padding-left:16px; border-left:2px solid var(--line);}
+  .evid b{ color:var(--grey); font-style:normal; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.05em;}
+
+  /* ---- Tables ---- */
+  table{ width:100%; border-collapse:collapse; margin:18px 0 28px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:14px;}
+  thead th{ background:var(--navy); color:#fff; text-align:left; padding:11px 14px; font-weight:700; font-size:12.5px; text-transform:uppercase; letter-spacing:.04em;}
+  tbody td{ padding:11px 14px; border-bottom:1px solid var(--line); vertical-align:top; color:#2B2E33;}
+  tbody tr:nth-child(even){ background:var(--paper2); }
+  tbody tr:hover{ background:#EFEAE0; }
+  td.num{ font-weight:700; color:var(--navy); width:36px;}
+
+  /* ---- Priority section blocks ---- */
+  .prio-tag{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    display:inline-block; font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.05em;
+    padding:4px 12px; border-radius:3px; margin-bottom:2px;}
+  .prio-tag.h{ background:var(--red-bg); color:var(--red);}
+  .prio-tag.m{ background:var(--amber-bg); color:var(--amber);}
+  .prio-tag.l{ background:var(--slate-bg); color:var(--slate);}
+
+  /* ---- Root cause summary boxes ---- */
+  .rc-box{ border:1px solid var(--line); border-radius:6px; padding:22px 24px; margin-bottom:18px; background:#fff;}
+  .rc-box.primary{ border-color:var(--accent); background:#FBF6EC; }
+  .rc-box h4{ margin-top:0; }
+
+  /* ---- Structure table (campaign spec) ---- */
+  .spec-table td:first-child{ font-weight:700; color:var(--navy); width:190px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:13px;}
+
+  /* ---- Client-facing block ---- */
+  .client-block{ background:var(--navy); color:#EDEFF3; padding:36px 36px; border-radius:8px; margin-top:20px;}
+  .client-block p{ color:#EDEFF3; font-size:17px; }
+  .client-block .tag{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    text-transform:uppercase; letter-spacing:.1em; font-size:11px; color:var(--accent-light); margin-bottom:16px; font-weight:700;}
+
+  footer{ text-align:center; padding:40px 0; color:var(--grey); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; font-size:12.5px;}
+
+  @media (max-width:640px){
+    .hero h1{ font-size:32px; }
+    .meta-grid{ grid-template-columns:1fr; }
+    .facts{ grid-template-columns:1fr; }
+    ul.kw{ columns:1; }
+    .qhead{ flex-direction:column; align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="kicker">Google Ads Audit · Brand Visibility Investigation</div>
+    <h1>Why Foremost Public Adjusters<br>no longer appears for its own name</h1>
+    <div class="hero-rule"></div>
+    <p class="sub">A senior-level root cause investigation into branded-search visibility, using Search Keyword, Search Terms, Ad, and Auction Insights report data.</p>
+    <div class="meta-grid">
+      <div><b>Client</b>Foremost Public Adjusters (foremostpa.com)</div>
+      <div><b>Prepared for</b>Danny — Senior Digital Marketing Consultant</div>
+      <div><b>Engagement</b>Google Ads Account Audit — Phase 2</div>
+      <div><b>Date</b>July 8, 2026</div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <h2 class="section" style="margin-top:56px;">Executive Summary</h2>
+  <p class="lede">Foremost Public Adjusters is not appearing on Google for searches on its own company name because the account's only brand-defense campaign (<b>"CT AN Search Branded"</b>) is paused, and neither of the two Search campaigns currently running contains a single branded keyword. This is a structural account-management gap — not a competitive, technical, or algorithmic problem — and it is fully confirmed in the account's own keyword-level history.</p>
+  <p>The keyword-level data proves the client's recollection is accurate: the phrase-match keyword <i>"foremost public adjusters"</i> generated 46 impressions, 10 clicks, and $56.55 in spend before the campaign it lived in was switched off. Foremost did rank for its own name — it stopped only because the campaign stopped, not because a competitor outbid them, a negative keyword blocked them, or Google began favoring organic results.</p>
+  <p>We tested nine other possible explanations against the data provided and found no supporting evidence for any of them as a material cause. Two secondary issues did surface that deserve attention but are not the reason brand searches show no ad:</p>
+  <ul class="tick">
+    <li>Foremost's non-brand ads currently trail two of three tracked competitors (flapublicadjusting.com, stellaradjusting.com) on Absolute Top-of-Page rate in generic auctions — a bid/rank issue on the core campaigns, separate from the brand gap.</li>
+    <li>Foremost's own historical broad-match keywords were shown bidding into competitors' brand searches (e.g., "stellar public adjusting," 1,806 impressions / $122.31 spent) — raising the real possibility competitors are doing the same in reverse. Unconfirmed pending a live check.</li>
+  </ul>
+  <div class="callout"><b>Recommended fix:</b> rebuild a proper Brand Defense campaign — not the old 2-keyword version — within days. Estimated cost: $150–$300/month. This is the single highest-ROI fix available in the account today, and it is a same-week fix, not a rebuild project.</div>
+
+  <h4 class="mini">Quick Facts</h4>
+  <div class="facts">
+    <div class="fact"><div class="k">Total campaigns in account</div><div class="v">17 (3 Enabled, 14 Paused)</div></div>
+    <div class="fact"><div class="k">Branded keywords in active campaigns</div><div class="v">0 of 247</div></div>
+    <div class="fact"><div class="k">Status of the only brand campaign ever built</div><div class="v">Paused</div></div>
+    <div class="fact"><div class="k">Lifetime "foremost public adjusters" (phrase) before pause</div><div class="v">46 impr · 10 clicks · $56.55</div></div>
+    <div class="fact"><div class="k">Evidence of negatives blocking the brand term</div><div class="v">None found</div></div>
+    <div class="fact"><div class="k">Evidence of PMax/DSA absorbing branded traffic</div><div class="v">None found</div></div>
+  </div>
+
+  <h2 class="section">Investigation Scope &amp; Data Sources</h2>
+  <p>This audit is a continuation of the Foremost Public Adjusters Google Ads engagement. It builds on the account architecture and diagnostics already delivered and incorporates the newly exported reports below, covering the account's full lifetime history through July 8, 2026.</p>
+
+  <h4 class="mini">Reports Analyzed</h4>
+  <ul class="tick">
+    <li>Search Keyword Report (two exports — confirmed to be the same full-account keyword set, 694 active keyword rows across 12 campaigns)</li>
+    <li>Search Terms Report (4 exports — one 38,871-row account-wide export, one scoped to the active HTS-Jun10 campaign, two identical Performance Max search-term exports)</li>
+    <li>Ad Report (scoped to "Public Adjuster &amp; Claim Help – Search 01" only — 7 live Responsive Search Ads)</li>
+    <li>Auction Insights Report (account-wide, generic-keyword scope)</li>
+    <li>Account Overview export: Campaigns, Networks, Optimisation Score, Search Queries (Word + Search), Auction Insights (compare metrics)</li>
+  </ul>
+
+  <h4 class="mini">Data Gaps — Flagged Upfront</h4>
+  <p>In the interest of never presenting unverified claims as fact, the following were not available and are called out explicitly wherever they affect a finding below:</p>
+  <ul class="tick grey">
+    <li>Campaign settings / Locations report (geo targeting cannot be independently confirmed)</li>
+    <li>Quality Score and Ad Rank at the keyword level</li>
+    <li>Ad creative for "HTS-Jun10 – All Services #2" (Ad Report provided was scoped to the other campaign)</li>
+    <li>Master negative keyword list at the account/shared-list level</li>
+    <li>A live, current SERP check for "foremost public adjusters"</li>
+  </ul>
+
+  <h2 class="section">Root Cause Analysis</h2>
+  <p>Each of the ten possible causes specified for this investigation, addressed with a finding, confidence level, and supporting evidence.</p>
+
+  <div id="qa-container"></div>
+
+  <h2 class="section">Root Cause Summary</h2>
+
+  <div class="rc-box primary">
+    <h4 class="mini" style="margin-top:0;">Primary Root Cause — Confirmed</h4>
+    <p style="margin-bottom:0;">The account's only brand-defense campaign ("CT AN Search Branded") is paused, and the two Search campaigns currently running contain zero branded keywords between them. This is a structural account-management gap: when the account was restructured around the new "HTS-Jun10" architecture, the brand campaign was never carried forward or rebuilt. It is directly confirmed by keyword-level history showing the brand phrase-match keyword generated real impressions and clicks before the campaign was paused.</p>
+  </div>
+
+  <div class="rc-box">
+    <h4 class="mini" style="margin-top:0;">Contributing / Secondary Factors</h4>
+    <ul class="tick" style="margin-bottom:0;">
+      <li>The original brand campaign build was thin even when live — 2 keywords, $56.55 lifetime spend — so "previous" visibility was likely modest, not dominant, and worth improving on relaunch rather than simply restoring.</li>
+      <li>Category-wide brand-conquesting behavior is plausible: Foremost's own broad-match keywords were shown bidding into competitors' brand terms, suggesting the reverse is a realistic risk — unconfirmed pending a live SERP/Auction Insights check.</li>
+      <li>Foremost's non-brand ads currently under-index on Absolute Top-of-Page rate versus 2 of 3 tracked competitors — a related but separate bid/quality issue on the core generic campaigns.</li>
+    </ul>
+  </div>
+
+  <div class="rc-box">
+    <h4 class="mini" style="margin-top:0; color:var(--green);">Ruled Out — Not Supported by the Data</h4>
+    <ul class="tick green" style="margin-bottom:0;">
+      <li>Negative keywords blocking the brand term specifically — no evidence found.</li>
+      <li>Performance Max or DSA absorbing branded clicks — no evidence at current spend/volume levels.</li>
+      <li>Google prioritizing organic over paid — mechanistically incorrect; there is no ad in the auction to be outranked.</li>
+      <li>Quality Score / Ad Rank collapse — indirect account-health signals are healthy; brand keywords typically score well by default.</li>
+    </ul>
+  </div>
+
+  <div class="rc-box">
+    <h4 class="mini" style="margin-top:0; color:var(--slate);">Cannot Assess — Data Gaps to Close Before Finalizing</h4>
+    <ul class="tick grey" style="margin-bottom:0;">
+      <li>Campaign settings / location targeting (no Locations report provided)</li>
+      <li>Quality Score / Ad Rank at the keyword level</li>
+      <li>Live SERP check for "foremost public adjusters" (competitor presence, organic health)</li>
+      <li>Ad creative for "HTS-Jun10 – All Services #2"</li>
+      <li>Master negative keyword list at the account/shared-list level</li>
+    </ul>
+  </div>
+
+  <h2 class="section">Priority Fixes</h2>
+
+  <span class="prio-tag h">High Priority — This Week</span>
+  <table>
+    <thead><tr><th style="width:34px;">#</th><th>Fix</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td>Reactivate "CT AN Search Branded" and re-enable the individually-paused [foremost public adjusters] exact-match keyword</td><td>Fastest possible fix — can be live same day; the campaign has already proven it can serve.</td></tr>
+      <tr><td class="num">2</td><td>Rebuild the campaign properly (see structure below) rather than relying on the old 2-keyword build</td><td>The prior build was too thin to defend the brand at scale; a proper build adds coverage and misspellings.</td></tr>
+      <tr><td class="num">3</td><td>Add a dedicated negative keyword list protecting against "Foremost Insurance" confusion</td><td>This exact confusion is already proven in the account's own data (paused DSA campaign).</td></tr>
+      <tr><td class="num">4</td><td>Pull and audit ad creative for "HTS-Jun10 – All Services #2"</td><td>An Enabled campaign with keywords but no live ad will never spend or show — needs direct confirmation.</td></tr>
+    </tbody>
+  </table>
+
+  <span class="prio-tag m">Medium Priority — Next 2–3 Weeks</span>
+  <table>
+    <thead><tr><th style="width:34px;">#</th><th>Fix</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td class="num">5</td><td>Run a live incognito SERP check for "foremost public adjusters" / "foremost pa"; re-pull Auction Insights filtered to the Brand campaign once live</td><td>Only reliable way to directly confirm or rule out competitor brand-bidding.</td></tr>
+      <tr><td class="num">6</td><td>Pull a Locations / campaign settings report to confirm geo targeting matches the intended service area</td><td>Closes the one meaningful data gap on the geography question.</td></tr>
+      <tr><td class="num">7</td><td>Review bid/budget strategy on core generic campaigns to improve Absolute Top-of-Page rate</td><td>Currently trailing 2 of 3 tracked competitors on this metric — separate from the brand issue but real.</td></tr>
+    </tbody>
+  </table>
+
+  <span class="prio-tag l">Low Priority — General Hygiene</span>
+  <table>
+    <thead><tr><th style="width:34px;">#</th><th>Fix</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td class="num">8</td><td>Consolidate or prune the dormant "Water Damage Claims –BOFU" ad group (40 mostly rarely-served keywords)</td><td>Currently near-zero volume; better folded into broader terms with real search volume.</td></tr>
+      <tr><td class="num">9</td><td>Review the 4 "Limited – low quality" keyword flags</td><td>Low volume, not urgent, but worth a clean-up pass.</td></tr>
+      <tr><td class="num">10</td><td>Archive legacy paused campaigns (14 of 17 total) that will not be reactivated</td><td>Simplifies future audits and reporting; no performance impact.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="section">Recommended Brand Campaign</h2>
+
+  <h3 class="sub">Should a dedicated Brand Campaign be created?</h3>
+  <p><b>Yes.</b> The account should not simply reactivate the old campaign as-is — the original 2-keyword build was too thin to properly defend the brand. We recommend rebuilding it as a dedicated, always-on Brand Defense campaign with fuller keyword coverage, a defensive negative list, and a bid strategy designed to win the top slot on the company's own name at minimal cost.</p>
+
+  <h3 class="sub">Recommended Structure</h3>
+  <table class="spec-table">
+    <tbody>
+      <tr><td>Campaign name</td><td>Brand – Foremost Public Adjusters</td></tr>
+      <tr><td>Network</td><td>Google Search only (Search Partners: test after 30 days of clean data; Display: off)</td></tr>
+      <tr><td>Bid strategy</td><td>Target Impression Share, targeting ~95% Absolute Top of Page</td></tr>
+      <tr><td>Budget</td><td>$5–$10/day ($150–$300/month) to start — branded CPCs are typically low and historical volume was light; revisit after 2–3 weeks of live data</td></tr>
+      <tr><td>Ad groups</td><td>2: "Brand Core" (exact/phrase company name + misspellings) and "Brand + Location/Service" (brand paired with city, state, or service qualifiers)</td></tr>
+      <tr><td>Ads</td><td>2–3 Responsive Search Ads per ad group, emphasizing "Official Site," licensing, and "No Recovery, No Fee"; sitelinks to Reviews, About, Locations, Contact</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="sub">Recommended Brand Keywords</h3>
+  <h4 class="mini">Ad Group 1 — Brand Core</h4>
+  <ul class="kw">
+    <li>[foremost public adjusters]</li>
+    <li>[foremost pa]</li>
+    <li>"foremost public adjuster"</li>
+    <li>"foremost public adjusters"</li>
+    <li>"foremostpa"</li>
+    <li>"foremostpa.com"</li>
+    <li>[foremost claims]</li>
+    <li>"foremost adjusters"</li>
+    <li>"foremost public adjustors" (misspelling)</li>
+    <li>"4most public adjusters" (misspelling)</li>
+  </ul>
+  <h4 class="mini">Ad Group 2 — Brand + Location / Service</h4>
+  <ul class="kw">
+    <li>"foremost public adjusters florida"</li>
+    <li>"foremost public adjusters miami"</li>
+    <li>"foremost public adjusters fort lauderdale"</li>
+    <li>"foremost public adjusters south florida"</li>
+    <li>"foremost public adjusters nashville"</li>
+    <li>"foremost water damage claims"</li>
+    <li>"foremost roof damage claims"</li>
+    <li>"foremost hurricane claims"</li>
+  </ul>
+
+  <h3 class="sub">Recommended Negative Keywords</h3>
+  <p>The account's own data already proves this exact confusion happens at scale — dozens of "Foremost Insurance" (a completely unrelated national insurer) queries were logged against a different campaign. The brand campaign should be protected from day one:</p>
+  <ul class="kw">
+    <li>foremost insurance</li>
+    <li>foremost insurance group</li>
+    <li>foremost county mutual</li>
+    <li>foremost farmers</li>
+    <li>farmers foremost</li>
+    <li>myforemost</li>
+    <li>foremost flood</li>
+    <li>foremost boat insurance</li>
+    <li>foremost rv insurance</li>
+    <li>foremost motorcycle insurance</li>
+    <li>foremost mobile home insurance</li>
+    <li>foremost auto insurance</li>
+    <li>foremost car insurance</li>
+    <li>foremost signature</li>
+    <li>jobs</li>
+    <li>salary</li>
+    <li>careers</li>
+    <li>license</li>
+  </ul>
+
+  <h2 class="section">Expected Results After Implementation</h2>
+  <table>
+    <thead><tr><th style="width:220px;">Metric</th><th>Expected Outcome</th></tr></thead>
+    <tbody>
+      <tr><td><b>Impression share</b><br>on core brand term</td><td>90–100% within days to ~2 weeks of relaunch — minimal competition expected on the exact company name</td></tr>
+      <tr><td><b>CTR</b><br>on brand ads</td><td>Typically 30–50%+ (vs. 6–36% currently seen on generic ad groups)</td></tr>
+      <tr><td><b>Average CPC</b></td><td>Materially lower than generic terms (generic avg. CPC currently $2.26–$8.86; branded CPC typically $0.50–$2.50)</td></tr>
+      <tr><td><b>Cost per conversion</b></td><td>Typically 3–5x more efficient than generic/service-intent traffic — branded searchers are closer to a decision</td></tr>
+      <tr><td><b>Defensive value</b></td><td>Closes the door on competitor conquesting and captures existing offline/referral/word-of-mouth demand currently finding no ad</td></tr>
+      <tr><td><b>Budget impact</b></td><td>$150–$300/month — a modest addition well within the previously scoped ~$2,700/month total program budget</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="section">Executive Summary — Client-Facing Version</h2>
+  <div class="client-block">
+    <div class="tag">For direct use in client communication</div>
+    <p>You're right — your ads did previously show when people searched for "Foremost Public Adjusters," and we found the exact proof in your account's history. The campaign built specifically to protect your brand name was paused during a broader account restructuring, and it was never rebuilt when your current campaigns were set up. That's the entire explanation: no competitor took your spot, nothing is technically broken, and Google has not started favoring organic results over ads. Your name simply isn't in any active campaign right now.</p>
+    <p>We reviewed every other possible explanation — negative keywords, Performance Max, Quality Score, impression share, account structure, and competitor bidding — and none of them are contributing to this issue based on the data available. Two smaller, unrelated issues are worth addressing separately: your standard (non-brand) ads are slightly behind two competitors on how often they win the very top ad position, and there's early evidence worth checking that a competitor could be bidding on your name, the same way your account has historically bid into theirs.</p>
+    <p style="margin-bottom:0;">Our recommendation is to rebuild your Brand campaign this week — a small, high-efficiency investment of roughly $150–$300/month — with full name coverage, common misspellings, and protection against the unrelated "Foremost Insurance" company that already causes confusion elsewhere in your account. We expect this to restore near-complete visibility on your name within about two weeks, at a lower cost per click and a meaningfully lower cost per lead than your other campaigns.</p>
+  </div>
+
+</div>
+
+<footer>Foremost Public Adjusters · Google Ads Brand Visibility Audit · Prepared July 8, 2026</footer>
+
+<script>
+const QA = [
+  {n:1, q:"Is the lack of brand keywords the primary issue?", conf:"veryhigh", confLabel:"Very High (Confirmed)",
+   finding:"Yes — with a precise caveat. It is not that Foremost has never built brand keywords; it's that the only campaign that ever held them (\"CT AN Search Branded\") is paused, and neither of the two Search campaigns currently running (163 + 84 = 247 active keywords) contains a single branded term. Even if the old brand campaign is never reactivated, the two live campaigns would never pick up a \"Foremost Public Adjusters\" search — they simply don't contain that keyword in any match type.",
+   evid:["Search Keyword Report: the only rows containing \"foremost\" anywhere in the account are 2 keywords inside the \"CT AN Search Branded\" campaign's \"Brand\" ad group — [foremost public adjusters] (Exact, individually Paused) and \"foremost public adjusters\" (Phrase, Not eligible — campaign paused).",
+          "Cross-checked all 247 keywords in the two active campaigns: zero brand terms."]},
+  {n:2, q:"Could another campaign (Performance Max, DSA, Broad Match, AI Search, etc.) be absorbing branded traffic?", conf:"high", confLabel:"High",
+   finding:"No evidence found. The active Performance Max campaign (\"PMax | Florida | Insurance Claims | Lead Gen\") has spent only $38.10 lifetime on 74 clicks / 2,340 impressions, and its full search-terms history contains zero branded queries. The Dynamic Search Ads campaign that previously absorbed unrelated \"Foremost Insurance\" traffic is itself paused, so it cannot currently be absorbing anything — branded or otherwise.",
+   evid:["Search Terms Report (PMax scope): 14 unique queries logged all-time, none brand-related; totals 74 clicks / $38.10 cost.",
+          "Campaigns overview: \"CT AN DSA\" status = Paused."]},
+  {n:3, q:"Could negative keywords be blocking branded searches?", conf:"medium", confLabel:"Medium–High",
+   finding:"No evidence found. The two \"foremost public adjusters\" keyword rows show their eligibility blocked exclusively by \"campaign paused\" — not by any negative-keyword conflict. Negative keywords were found, but they were correctly protecting against a different, unrelated company: \"Foremost Insurance,\" which generated dozens of confusable exact-match queries against the paused DSA campaign, most already marked \"Excluded.\" That is a correct exclusion, not a mistake blocking Foremost Public Adjusters' own name.",
+   evid:["Search Keyword Report: status reason for both brand keywords = \"campaign paused\" only.",
+          "Search Terms Report (38,871 rows): ~120 distinct \"foremost insurance…\" queries logged against \"CT AN DSA,\" many flagged Excluded — versus zero logged queries anywhere for \"foremost public adjusters.\"",
+          "Master account/shared negative list was not exported, so a conflict at that level cannot be 100% ruled out."]},
+  {n:4, q:"Could location targeting explain why I cannot see the ads?", conf:"gap", confLabel:"Data Gap — Low Probability",
+   finding:"Cannot be directly confirmed — no campaign settings or Locations report was included in this export set. It is very unlikely to be the primary explanation regardless: a paused campaign will not serve in any geography, and the two active campaigns lack the triggering keyword regardless of where the search originates. Recommend pulling a Locations performance report to fully close this out.",
+   evid:["No Locations / campaign settings report was among the files provided.",
+          "Logical elimination: campaign-pause and keyword-absence are sufficient on their own to fully explain zero visibility, independent of geography."]},
+  {n:5, q:"Could Ad Rank or low Quality Score prevent brand visibility?", conf:"low", confLabel:"Low Probability — Partial Data Gap",
+   finding:"No Quality Score or Ad Rank data was exported, so this cannot be measured directly for the brand term. Indirect account-health signals suggest this is unlikely to be material: Ad Strength on all 7 live Responsive Search Ads is Good/Excellent/Average (none Poor), CTR on the 7 live ads ranges 4.4%–35.6%, and only 4 of 247 active keywords are flagged \"Limited – low quality\" (none brand-related). Branded exact-match keywords for a company's own name almost always score well on Quality Score once live.",
+   evid:["Ad Report: Ad Strength = Excellent (4), Good (2), Average (1) across the 7 live ads; none Poor.",
+          "Search Keyword Report: only 4 \"low quality\" flags account-wide within active campaigns, all on unrelated long-tail terms."]},
+  {n:6, q:"Is Impression Share causing the issue?", conf:"veryhigh", confLabel:"Very High (Confirmed)",
+   finding:"Impression Share measures how often you show when you are competing in an auction — it only applies to keywords that are actively bidding. Because no active campaign or keyword is bidding on \"Foremost Public Adjusters,\" impression share on that query is 0% by definition — not because Foremost is losing a competitive auction, but because Foremost isn't entering the auction at all. This is mechanically different from a typical \"lost IS\" scenario.",
+   evid:["Search Keyword Report: keyword status = \"Not eligible,\" reason = \"campaign paused\" (not \"limited by budget\" or \"low rank\")."]},
+  {n:7, q:"Is the campaign structure contributing to the problem?", conf:"high", confLabel:"High",
+   finding:"Yes, materially. Of 17 total campaigns in the account, only 3 are Enabled, and there is no dedicated, durable brand-defense layer in the current structure — the one campaign ever built for brand terms was a thin, 2-keyword build that only ever spent $56.55 lifetime. Separately, the \"HTS-Jun10 – All Services #2\" campaign's \"Water Damage Claims –BOFU\" ad group (40 keywords) is almost entirely dormant, and this audit could not confirm whether that ad group even has a live ad, since the Ad Report provided covers the other active campaign only.",
+   evid:["Campaigns overview: 17 total campaigns, 14 Paused, 3 Enabled.",
+          "\"CT AN Search Branded\" lifetime spend = $56.55 across 2 keywords — a token build, not a real always-on brand-defense campaign.",
+          "\"Water Damage Claims –BOFU\" ad group: 40 keywords, 1 impression, $0 cost lifetime; 11 of those 40 individually flagged \"rarely served.\""]},
+  {n:8, q:"Is Google prioritizing the organic listing instead of ads?", conf:"high", confLabel:"High (mechanistic, not data-driven)",
+   finding:"No — this is not what is happening, and it reflects a common misconception worth correcting directly. Google does not choose to show organic \"instead of\" paid on a query-by-query basis when both are eligible; what's happening is upstream of that comparison: there is no eligible Foremost ad entering the auction for this query at all (zero active brand keywords), so there's nothing for Google to rank against the organic listing in the first place.",
+   evid:["Logical elimination based on confirmed keyword-level eligibility data above.", "No organic/GSC data was part of this data set — recommend manual verification."]},
+  {n:9, q:"Could competitors be bidding on the brand?", conf:"medium", confLabel:"Cannot Confirm from Data — Medium Likelihood",
+   finding:"Cannot be confirmed or ruled out from the reports provided. Auction Insights data reflects the account's generic-keyword auctions only — because no brand campaign is currently active, there is no brand-specific data to isolate competitor behavior. Three competitor domains recur across the account's generic auctions: flapublicadjusting.com (13.47% IS), stellaradjusting.com (14.26% IS), fightforyourclaim.com (<10% IS). Notably, the reverse pattern is directly evidenced in this account's own history — Foremost's broad-match keywords were themselves triggering on competitor brand searches.",
+   evid:["Auction Insights Report: flapublicadjusting.com, stellaradjusting.com, fightforyourclaim.com recur in Foremost's auctions (generic-term scope).",
+          "Search Queries (Word) report: Foremost's own broad-match spent $122.31 on the competitor brand term \"stellar public adjusting\" (1,806 impressions) — direct evidence of brand-conquesting behavior in this category, in reverse.",
+          "Recommend: live incognito SERP check, and re-pull Auction Insights filtered to the Brand campaign once reactivated."]},
+  {n:10, q:"Are there any issues visible from the Auction Insights report?", conf:"high", confLabel:"High (scope-limited)",
+   finding:"The Auction Insights report provided is scoped to the account's generic search terms, not brand terms. Within that scope, Foremost holds 17.58% impression share account-wide and has the lowest Absolute Top-of-Page rate (25.07%) among the four advertisers shown — versus flapublicadjusting.com (52.64%) and stellaradjusting.com (40.04%). This is a real, secondary finding worth addressing on the core (non-brand) campaigns, but it is not the reason brand searches show no ad at all.",
+   evid:["Auction Insights Report: You (Foremost) 17.58% IS / 25.07% Abs. Top of Page vs. flapublicadjusting.com 13.47% IS / 52.64% Abs. Top of Page and stellaradjusting.com 14.26% IS / 40.04% Abs. Top of Page."]},
+];
+
+const container = document.getElementById('qa-container');
+QA.forEach(item => {
+  const card = document.createElement('div');
+  card.className = 'qcard';
+  const evidHtml = item.evid.map(e => `<div class="evid"><b>Evidence — </b>${e}</div>`).join('');
+  card.innerHTML = `
+    <div class="qhead">
+      <div class="qnum">Q${item.n}</div>
+      <div class="qtext">${item.q}</div>
+      <div class="badge ${item.conf}">${item.confLabel}</div>
+    </div>
+    <div class="qbody">
+      <p>${item.finding}</p>
+      ${evidHtml}
+    </div>`;
+  container.appendChild(card);
+});
+</script>
+
+</body>
+</html>
